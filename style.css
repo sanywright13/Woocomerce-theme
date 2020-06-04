@@ -1,0 +1,282 @@
+/*
+ Theme Name:   Mon thème enfant
+ Theme URI:    https://monsite.com
+ Description:  Description de mon thème enfant
+ Author:       Sanaa Lakrouni
+ Author URI:   https://wpmarmite.com
+ Template:     storefront
+ Version:      1.0.0
+*/
+.beta.site-title a {
+    color: red;
+}
+.background-costume{
+    background-position: center center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.header-container{
+	position: relative;
+	display: block;
+height: 757px;
+
+}
+.site-header{
+    padding-top: 0em;
+}
+.menu .page_item a{
+    color:#fff;
+}
+.menu .current_page_item a{
+    color: #fff;
+}
+.main-navigation a{padding: 0px;}
+.navbar-light .navbar-brand {
+    color: rgb(66, 228, 107);
+    font-size: 2rem;
+}
+.main-navigation, .secondary-navigation{
+
+    display:flex;
+}
+.widget {
+    margin: 0em;
+}
+.site-header-cart .cart-contents {
+    text-indent: 0;
+    color: #fff;
+}
+.navbar{
+padding: 0px;
+}
+.has-text-align-center {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+.container {
+    max-width: 1257px;
+}
+.single-product div.product p.price {
+    font-size: 1.41575em;
+    margin: 1.41575em 0;
+    line-height: 0px;
+}
+.single_add_to_cart_button.button.alt {
+    width: 405px;
+}
+.add-tocart {
+    display: inline-block;
+    margin-top: 19px;
+    position: relative;
+}
+.single-product div.product form.cart .quantity {
+    margin-right: 0.875em;
+    float: none;
+}
+.splash{
+    background-color: black;
+padding: 6em;
+}
+.desc {
+    font-size: 1.5rem;
+    color: #181613;
+    font-weight: 500;
+    text-align: center;
+}
+.mini-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+/* carousel front end */
+
+/*
+    code by Iatek LLC 2018 - CC 2.0 License - Attribution required
+    code customized by Azmind.com
+*/
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Show 4th slide on md if col-md-4*/
+    .carousel-inner .active.col-md-4.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -33.3333%;  /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+    /* Show 3rd slide on sm if col-sm-6*/
+    .carousel-inner .active.col-sm-6.carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -50%;  /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+}
+@media (min-width: 576px) {
+    .carousel-item {
+        margin-right: 0;
+    }
+    /* show 2 items */
+    .carousel-inner .active + .carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
+        transition: none;
+    }
+    .carousel-inner .carousel-item-next {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+    /* left or forward direction */
+    .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* farthest right hidden item must be also positioned for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+    /* right or prev direction */
+    .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+/* MD */
+@media (min-width: 768px) {
+    /* show 3rd of 3 item slide */
+    .carousel-inner .active + .carousel-item + .carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+        transition: none;
+    }
+    .carousel-inner .carousel-item-next {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* right or prev direction */
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+/* LG */
+@media (min-width: 991px) {
+    /* show 4th item */
+    .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+        display: block;
+    }
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+        transition: none;
+    }
+    /* Show 5th slide on lg if col-lg-3 */
+    .carousel-inner .active.col-lg-3.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -25%;  /*change this with javascript in the future*/
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+    /* left or forward direction */
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+    /* right or prev direction //t - previous slide direction last item animation fix */
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+
+.wc-block-featured-category__title{
+    top: 181px;
+position: relative;
+font-weight: 500;
+font-size: 2.5rem;
+}
+
+.wc-block-featured-category__link{top: 164px;
+    position: relative;}
+.buy{
+    background-color: black;
+border-radius: 0px;
+color: #fff;
+width: 100%;
+}
+.shop-now{
+    position: relative;
+    top: 108px;
+    right: 132px;
+}
+.titre{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 598;
+}
+.storefront-breadcrumb {
+    padding:0em;
+    margin: 0em;
+}
+ .buy a {
+    color: #fff;
+}
+.onsale{
+    display: none;
+}
+.single-product div.product form.cart .quantity {
+  
+    padding-left: 1em;
+}
+.qte{
+    color: #1f1f1f;
+    font-size: 19px; 
+}
+.quantity .qty {
+    width: 13.236em;
+    text-align: center;
+}
+.comment_container{
+    border-bottom: 1px solid #dedede;
+}
+#reviews .commentlist li .comment_container {
+    border-radius: 0px;
+}
+.description{
+    font-family: "futura-pt",arial,sans-serif !important;
+    color: #000 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;}
