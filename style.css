@@ -280,3 +280,7 @@ width: 100%;
     font-size: 16px !important;
     font-weight: 400 !important;
     line-height: 22px !important;}
+
+    .col-lg-4 .single_add_to_cart_button.button.alt {
+        width: 264px;
+    }

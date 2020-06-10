@@ -32,44 +32,77 @@ do_action( 'woocommerce_before_main_content' );
 <?php if ( apply_filters( 'sanstore_product_category_title', true ) ) : ?>
 		<h1 class="woocommerce-products-header__title page-title"></h1>
 	
-<?php  endif; ?>
+<?php  endif; 
+
+
+
+?>
 </header>
 
 <div class="container">
 <div class="row">
-	<div class="col-lg-3"><?php do_action( 'woocommerce_before_shop_loop' );
- ?></div>
+<?php //do_action( 'woocommerce_before_shop_loop_2' );
+ ?>
+	<div class="col-lg-3">
+Filter by :
+	<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" name="price">price</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" name="popularity">popularity</a>
+    </div>
+  </div>
+  
+</div>
+	</div>
 <div class="col-lg-9">
+
 <?php 
 
-if(have_posts()){
-	echo '<div class="row">';
-while(have_posts()){
-	echo '<div class="col-lg-3">';
-	the_post();
+
+//var_dump($wp_query);
+do_action('woocommerce_loop_category');
+
+
+?>
+</div>
+</div>
+</div>
+<script>
+	$(document).ready(function () {
+
+let elt=$('#v-pills-tab>*');
+
+elt.map( (i,v ) => {
+  console.log(v.id + " "+v.name);
+  const lien_class=v.id;
+  const order=v.name;
+$("#"+lien_class).on('click',function(){
+
+  let url="http://localhost/wordpresse2/wordpress/product-category/clothing?orderby="+order;
+  document.location = url ;
+
+});
+  
+});
+/*
+$('#v-pills-tab').on("click",function(){
+
 	
-	echo '<div><a href="'.get_permalink( $product->get_id() ).'">'.$product->get_image().'</a></div>';
-	echo '<div>'.$product->get_name().'</div>';
-	echo '<div>'.$product->get_price().' DH</div>';
-	echo'<div class="p-2">'. do_action( 'woocommerce_after_shop_loop_item' ).'</div>';
+//GET the url 
+window.location="http://localhost/wordpresse2/wordpress/product-category/clothing/";
 
-	echo '</div>';
+let url=window.location+"?orderby=price";
+document.location = url
+console.log(url);
 
-?>
 
+});
+*/
+	});
+	
+	</script>
 <?php
-}
-echo '</div>';
-}
-?>
-</div>
-</div>
-</div>
-
-<?php
-
-
-
 
 
 get_footer( 'shop' );

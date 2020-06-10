@@ -213,9 +213,11 @@ add_action('storefront_page','section_laivraison',22);
 function section_laivraison(){
 $args=array(
 	'post_type' => 'product',
-	'posts_per_page'=>'12'
+  'posts_per_page'=>'12',
+  'category'=>'clothing'
 ) ;
 $loop=new WP_Query($args);
+
 if($loop->have_posts()):
   ?>
 <h2 class="text-center mini-title">Nos Produits</h2>
@@ -225,7 +227,8 @@ if($loop->have_posts()):
             <div class="carousel-inner row w-100 mx-auto" role="listbox">
               <?php $i=1 ;
               while($loop->have_posts()):
-                	$loop->the_post();
+                  $loop->the_post();
+                  
                   $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"medium");
                   ?>
                 <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 <?php if($i==1){?>active <?php } ?>">
@@ -262,4 +265,142 @@ function remove_description_tabs($tabs){
   return $tabs;
 }
 
+add_action( 'woocommerce_before_shop_loop_2', 'change_woocommerce_catalog_ordering',15);
+function change_woocommerce_catalog_ordering(){
+
+  if ( ! wc_get_loop_prop( 'is_paginated' ) || ! woocommerce_products_will_display() ) {
+    return;
+  }
+  $show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
+  $catalog_orderby_options = apply_filters(
+    'woocommerce_catalog_orderby',
+    array(
+      'menu_order' => __( 'Default sorting', 'woocommerce' ),
+      'popularity' => __( 'Sort by popularity', 'woocommerce' ),
+      'rating'     => __( 'Sort by average rating', 'woocommerce' ),
+      'date'       => __( 'Sort by latest', 'woocommerce' ),
+      'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
+      'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
+    )
+  );
+
+  $default_orderby = wc_get_loop_prop( 'is_search' ) ? 'relevance' : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', '' ) );
+  $orderby         = isset( $_GET['orderby'] ) ? wc_clean( wp_unslash( $_GET['orderby'] ) ) : $default_orderby; // WPCS: sanitization ok, input var ok, CSRF ok.
+
+  if ( wc_get_loop_prop( 'is_search' ) ) {
+    $catalog_orderby_options = array_merge( array( 'relevance' => __( 'Relevance', 'woocommerce' ) ), $catalog_orderby_options );
+
+    unset( $catalog_orderby_options['menu_order'] );
+  }
+
+  if ( ! $show_default_orderby ) {
+    unset( $catalog_orderby_options['menu_order'] );
+  }
+
+  if ( ! wc_review_ratings_enabled() ) {
+    unset( $catalog_orderby_options['rating'] );
+  }
+
+  if ( ! array_key_exists( $orderby, $catalog_orderby_options ) ) {
+    $orderby = current( array_keys( $catalog_orderby_options ) );
+  }
+
+  wc_get_template(
+    'loop/orderby.php',
+    array(
+      'catalog_orderby_options' => $catalog_orderby_options,
+      'orderby'                 => $orderby,
+      'show_default_orderby'    => $show_default_orderby,
+    )
+  );
+}
+
+
+add_action('pre_get_posts','order_category_loop',10);
+
+function order_category_loop($query){
+ if(is_tax('product_cat') && $query->is_main_query()){
+   /*
+if(isset($_GET['orderby'])){
+  $arg=$_GET['orderby'];
+
+}
+else{
+  $arg='title';
+}
+
+if(isset($arg) &&  esc_html($arg)=="price") {
+
+ 
+
+   $query->set('orderby','meta_value_num');
+   $query->set('meta_key','_price');
+  $query->set('order','ASC');*/
+  $query->set('posts_per_page',10);
+/*
+}
+else{
+
+$query->set('orderby','meta_value_num');
+$query->set('meta_key',"_price");
+$query->set('order','DESC');
+$query->set('posts_per_page','20');
+} */
+ } 
+
+}
+
+
+add_filter( 'woocommerce_get_catalog_ordering_args', 'custom_woocommerce_get_catalog_ordering_args' );
+function custom_woocommerce_get_catalog_ordering_args( $args ) {
+  $orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+	if ( 'random_list' == $orderby_value ) {
+		$args['orderby'] = 'rand';
+		$args['order'] = '';
+		$args['meta_key'] = '';
+  }
+  else{
+    if($orderby_value=="price"){
+echo $orderby_value;
+      $args['orderby'] = 'meta_value_num';
+		$args['order'] = 'DESC';
+		$args['meta_key'] = '_price';
+    }
+    else if('popularity' == $orderby_value){
+      $args['orderby']  = ['menu_order' => 'DESC', 'meta_value_num' => 'DESC'];
+      $args['meta_key'] = 'total_sales';
+    }
+  }
+	return $args;
+}
+add_action('woocommerce_loop_category','add_loop_category',10);
+if(!function_exists('add_loop_category')){
+  function add_loop_category(){
+    global $wp_query;
+    global $post;
+   //var_dump($wp_query);
+if(have_posts()){?>
+<div class="row">
+   <?php while(have_posts()){
+     the_post();?>
+   <div class="col-lg-4">
+   <?php
+      $price = get_post_meta($post->ID,'_price',true);?>
+<a href="<?php echo get_the_permalink();?>" >
+<?php if(has_post_thumbnail()){
+ echo the_post_thumbnail();
+}?>
+</a>
+<?php
+  
+echo the_title().' ';
+echo $price;
+woocommerce_external_add_to_cart();?>
+</div>
+<?php
+}?>
+</div>
+  <?php }
+  }
+}
 ?>

@@ -30,4 +30,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wc_query_string_form_fields( null, array( 'orderby', 'submit', 'paged', 'product-page' ) ); ?>
 </form>
 
-
