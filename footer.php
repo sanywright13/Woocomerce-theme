@@ -13,7 +13,7 @@
 	</div><!-- #content -->
 	</div><!-- #page -->
 </div>
-<?php do_action('emails_form')?>
+
 	<?php do_action( 'storefront_before_footer' ); ?>
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
@@ -32,44 +32,57 @@
 		</div><!-- .col-full -->
 	</footer><!-- #colophon -->
 
-	<?php do_action( 'storefront_after_footer' ); ?>
+	<?php do_action( 'storefront_after_footer' ); 
+
+
+	?>
 
 	<script>
 /*
     Carousel
 */
   
-$(document).ready(function($) {
-	console.log('hellop');
-$('#carousel-example').on('slide.bs.carousel', function (e) {
+jQuery(document).ready(function($){
+
+  function  check_if_in_view (){
  
-    var $e = $(e.relatedTarget);
-    var idx = $e.index();
-	console.log(idx);
-    var itemsPerSlide = 5;
-	console.log(itemsPerSlide);
-    var totalItems = $('.carousel-item').length;
- console.log( totalItems);
-    if (idx >= totalItems-(itemsPerSlide-1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i=0; i<it; i++) {
-            // append slides to end
-            if (e.direction=="left") {
-                $('.carousel-item').eq(i).appendTo('.carousel-inner');
-            }
-            else {
-                $('.carousel-item').eq(0).appendTo('.carousel-inner');
-            }
-        }
-    }
-});
-//image hover
+$('.animate__animated').each(function(){
+	element_high=$(this).offset().top+$(this).outerHeight();
+
+	window_scroll=$(window).scrollTop()+$(window).height();
+	
+	if($(this).offset().top<=window_scroll && element_high>=$(window).scrollTop()){
+		console.log($(this)[0]);
+		console.log($('.bio_category_desc')[0]);
+if($(this)[0]==$('.bio_category_desc')[0]){
+$(this).addClass('animate__fadeInLeft')
+}
+	if($(this)[0]==$('.zone')[0]){
+		$(this).addClass('animate__slideInUp')
+	}
 
 
+	}
+})
+	
+  }
+ 
+	$(window).on('scroll resize', check_if_in_view);
+
+	$('.zone .col-2 ').on('hover',function(){
+	  $(this).toggleClass('animate__animated animate__headShake')
+	  
+  })
+  $('.attachment-post-thumbnail').on('hover',function(){
+	$(this).toggleClass('animate__animated animate__pulse')
+	  
+  })
 
 });
 </script>
-<?php wp_footer(); ?>
+
+
+<?php  wp_footer(); ?>
 
 </body>
 </html>

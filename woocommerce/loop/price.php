@@ -23,5 +23,5 @@ global $product;
 ?>
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
-	<span class="price"><?php echo $price_html; ?></span>
+<div class="price" <?php if(!wc_get_rating_html( $product->get_average_rating())) {?> style="min-height: 54px;" <?php }?>> <?php  echo $price_html; ?></div>
 <?php endif; ?>

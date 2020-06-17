@@ -29,8 +29,8 @@
 <div id="page" class="hfeed site">
 	<?php do_action( 'storefront_before_header' ); ?>
 
-<header id="masthead" class=" <?php if (is_front_page()){?> header-container background-costume" <?php };?> role="banner" style="<?php storefront_header_styles(); ?> <?php if (is_front_page()):?> ; background-image:
-		url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/05/slider_main_2.jpg)"<?php endif;?>>
+<header id="masthead" class="<?php if (is_front_page()){?> header-container background-costume" <?php }else { echo '"';};?> role="banner" style="<?php storefront_header_styles();  if (is_front_page()):
+ echo 'background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/05/slider_main_2.jpg)';endif; ?>" >
 
 		<?php
 		/**
@@ -53,7 +53,7 @@
 		?>
 		<div class="container">
 		<div class="shop-now">
-		<h3 class="col-lg-8 titre">Prenez soin de vous avec des produits 100% Marocains naturel certifie et Bio<h3>
+		<h3 class="col-lg-8 titre">Prenez soin de vous avec des produits 100% Marocains naturel certifie et Bio</h3>
 <div class="col-lg-3 ">
 
 <button class="btn buy"><a href="http://localhost/wordpresse2/wordpress/shop/" class="">SHOP NOW</a></button>
@@ -76,8 +76,7 @@
 	do_action( 'storefront_before_content' );
 	?>
 
-	<div id="content" class="container" tabindex="-1">
-		<div class="row ">
-<div class="col-lg-12 p-5">
+	<div id="content" class="" tabindex="-1">
+	
 		<?php
-		do_action( 'storefront_content_top' );
+		do_action( 'storefront_content_top' );?>

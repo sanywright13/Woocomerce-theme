@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div class="woocommerce-billing-fields">
+<div class="billing">
 	<?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
 		<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
 
-	<div class="woocommerce-billing-fields__field-wrapper">
+	<div class="">
 		<?php
 		$fields = $checkout->get_checkout_fields( 'billing' );
 
@@ -48,7 +48,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="woocommerce-account-fields">
 		<?php if ( ! $checkout->is_registration_required() ) : ?>
 
-			<p class="form-row form-row-wide create-account">
+			<p class=" create-account">
 				<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
 					<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ); ?> type="checkbox" name="createaccount" value="1" /> <span><?php esc_html_e( 'Create an account?', 'woocommerce' ); ?></span>
 				</label>

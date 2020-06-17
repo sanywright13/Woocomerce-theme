@@ -9,13 +9,15 @@ function startwordpress_scripts() {
     wp_enqueue_style('fontsawesome', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css');
    
        wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
-     wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
+       wp_enqueue_style('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css');
+
+       wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
   
-  
-  wp_enqueue_script( 'boot1','https://code.jquery.com/jquery-3.4.1.min.js', array( 'jquery' ),'',false);
-      wp_enqueue_script( 'boot2','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', array( 'jquery' ),'',true );
+      wp_enqueue_script( 'boot2','https://code.jquery.com/jquery-3.4.1.slim.min.js', array( 'jquery' ),'',true );
+      wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
+
       wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
-      
+
   }
   
 
@@ -35,32 +37,80 @@ add_action('storefront_header','remove_prev_navigation');
 function remove_prev_navigation(){
   remove_action( 'storefront_header', 'storefront_primary_navigation', 50 );
 }
+
+add_action( 'storefront_header', 'remove_storefront_header_cart');
+
+function remove_storefront_header_cart(){
+ remove_action( 'storefront_header', 'storefront_header_cart', 60 );
+
+}
+add_action( 'website_header', 'website_header_cart',10);
+if ( ! function_exists( 'website_header_cart' ) ) {
+	/**
+	 * Display Header Cart
+	 *
+	 * @since  1.0.0
+	 * @uses  storefront_is_woocommerce_activated() check if WooCommerce is activated
+	 * @return void
+	 */
+	function website_header_cart() {
+		if ( storefront_is_woocommerce_activated() ) {
+			if ( is_cart() ) {
+				$class = 'current-menu-item';
+			} else {
+				$class = '';
+			}
+			?>
+		<ul id="site-header-cart" class="site-header-cart menu">
+			<li class="<?php echo esc_attr( $class ); ?>">
+				<?php storefront_cart_link(); ?>
+			</li>
+			<li>
+				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
+			</li>
+		</ul>
+			<?php
+		}
+	}
+}
+
+//add menu 
+add_action('init','bio_add_header_menu');
+function bio_add_header_menu(){
+  register_nav_menu('header_menu',__( 'Header menu' ));
+}
 function add_new_header_nav(){
 ?> 
 
 
- <div id="site-navigation" class="main-navigation container-fluid navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'storefront' ); ?>">
- <div class="container-fluid ">
- <div class="row" style="width: 100%;">
-<div class="col-7 ml-auto" style="">
-<a class="navbar-brand" href="#"><img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" alt="" /></a>
-  
+<div class="navbar navbar-expand-lg navbar-light bg-light" >
+ 
+ 
+ <div class="row" style="width:100%">
+ <div class=" call col-2 ">
+ <i class="fas fa-phone-square-alt pr-2"></i>0650481844
 </div>
 
-  <div class="col-12">
-  <hr>
+<div class="col-2 offset-md-3">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" alt="">
+</div>
+
+<div class="col-3 offset-md-2 ml-auto">
+<?php do_action('website_header');?>
+
+</div>
+
  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"><i class="fas fa-list-alt"></i></span>
 </button>
-<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
     <?php
     wp_nav_menu(
       array(
-        'theme_location'  => 'primary',
+        'theme_location'  => 'header_menu',
         'container' => 'div',
         'container_class'=>'collapse navbar-collapse',
-        'container_id'      => 'navbarResponsive',
+        'container_id'      => 'navbarTogglerDemo01',
         'menu_class'=>' navbar-nav mr-auto mt-2 mt-lg-0',
 
        
@@ -68,16 +118,14 @@ function add_new_header_nav(){
     );
 
     ?>
-       <form class="form-inline my-2 my-lg-0">
+   
  <?php the_widget( 'WC_Widget_Product_Search', 'title=' ); ?>
 
-    </form>
-    </div>
-  </div>
-  </div>
-  </div>
-  </div><!-- #site-navigation -->
+   
 
+  </div>
+  
+  </div><!-- #site-navigation -->
   <?php
 }
 
@@ -98,39 +146,9 @@ remove_action( 'storefront_header', 'storefront_product_search', 40 );
 }
 
 
-add_action( 'storefront_header', 'remove_storefront_header_cart');
-if(! function_exists('remove_storefront_header_cart')){
-  function remove_storefront_header_cart(){
-remove_action('storefront_header', 'storefront_header_cart', 61);
-  } 
-}
 
-add_action('storefront_header','add_cart_header',50);
-if(!function_exists('add_cart_header')){
 
-  function add_cart_header(){
-    if ( storefront_is_woocommerce_activated() ) {
-			if ( is_cart() ) {
-				$class = 'current-menu-item';
-			} else {
-				$class = '';
-			}
-      ?>
-      <div class="d-flex justify-content-end">
-		<ul id="site-header-cart" class="site-header-cart menu  col-3">
-			<li class="<?php echo esc_attr( $class ); ?>">
-				<?php storefront_cart_link(); ?>
-			</li>
-			<li>
-				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
-			</li>
-    </ul>
-    </div>
-			<?php
-		}
 
-  }
-}
 add_action( 'storefront_homepage', 'remove_storefront_homepage_header',9);
 if(! function_exists('remove_storefront_homepage_header')){
   function remove_storefront_homepage_header(){
@@ -191,7 +209,6 @@ add_filter('sanstore_product_category_title','change_title_category');
 function change_title_category(){
 $tr=get_queried_object()->name;?>
 <h1 class="woocommerce-products-header__title page-title"><?php echo $tr;?></h1>
-<h2>Explore all of our best product of  <?php echo $tr ; ?> category</h2>
 <?php
 }
 add_action('emails_form','add_homepage_email_form',10);
@@ -200,60 +217,112 @@ function add_homepage_email_form(){
 <div class="splash"><div class="row"></div><div class="col-lg-12"><div class="">Emails</div></div></div>
  <?php }
 }
-
-add_action('storefront_content_top','theme_description');
+/*
+add_action('storefront_content_top','theme_description',14);
 function theme_description(){
   if(is_front_page()){
-    echo "<h1 class='p-5 desc'>Parce que prendre soin de son corps, c'est prendre soin de son esprit. 
+    echo "<h1 class='p-5 desc '>Parce que prendre soin de son corps, c'est prendre soin de son esprit. 
     RARE ARGAN vous partage quelques rituels de beauté et vous accompagne dans vos petits moments de détente.</h1>";
   }
 }
+*/
+add_action('storefront_content_top','bio_theme_categories',10);
 
+function bio_theme_categories(){
+if(is_front_page()){?>
+  <section class="bio_category_desc animate__animated row mt-5 ">
+		  <div class="container mt-5" >
+<div class="row">
+<div class="col-lg-6">
+<a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
+<img src=" http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/produits-cosmetiques-lhuile-argan-botanika.jpg" alt=" ">
+  <p class="des-front">Tous les produits ma Bio sont bio et purs
+  Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
+  </p>
+  <span class="save">Save 20%</span>
+
+</a>
+</div>
+
+<div class="col-lg-6">
+<a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/huile-d-argan-60-ml.jpg" alt="" >
+<p class="des-front">Achetez maintenant et économisez 20%
+Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
+</p>
+<span class="save">Save 20%</span>
+
+</a>
+</div>
+</div>
+</div>
+          </section>
+<?php }
+
+}
+
+// To change add to cart text on product archives(Collection) page
+add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );  
+function woocommerce_custom_product_add_to_cart_text() {
+    return __( 'Ajouter Au Panier', 'woocommerce' );
+}
+/*
+add_action('storefront_page','section_categories',21);
+
+function section_categories(){
+  if(is_front_page()){?>
+  <section class="categories">
+  Hi
+  </section>
+  <?php
+}
+}
+*/
 add_action('storefront_page','section_laivraison',22);
 function section_laivraison(){
+  if(is_front_page()){
 $args=array(
 	'post_type' => 'product',
-  'posts_per_page'=>'12',
-  'category'=>'clothing'
+  'posts_per_page'=>'4',
+  
 ) ;
 $loop=new WP_Query($args);
 
 if($loop->have_posts()):
   ?>
-<h2 class="text-center mini-title">Nos Produits</h2>
-<div class="top-content">
-    <div class="container-fluid">
-        <div id="carousel-example" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+  <section class="produits container mb-5">
+<h2 class="text-center mini-title m-4">NOS PRODUITS & SERVICES
+</h2>
+<div class="row mt-5">
               <?php $i=1 ;
               while($loop->have_posts()):
-                  $loop->the_post();
-                  
-                  $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"medium");
+                  $loop->the_post();?>
+                   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 product-item">
+                   <?php
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"medium");
                   ?>
-                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 <?php if($i==1){?>active <?php } ?>">
-              <?php  echo '<a href="'.get_permalink( $loop->post->ID).'"><img src="'.$image[0].'" class="img-fluid mx-auto d-block"/></a>';
-	echo '<span>'. do_action( 'woocommerce_after_shop_loop_item' ).' <span>';
+               
+              <?php  echo '<a href="'.get_permalink( $loop->post->ID).'"><img src="'.$image[0].'" class="hvr-bounce-out" style="width: 99%;
+height: 374px;"/></a>';
+              ?>  <div class="product_info"> <div class="titre-produit "><?php the_title() ;?></div>
+             
+              <?php do_action( 'woocommerce_after_shop_loop_item_title' );
+  echo '<span>'. do_action( 'woocommerce_after_shop_loop_item' ).' <span>';
+ 
   ?>
+  </div>
                 </div>
                
               <?php $i=$i+1; endwhile; ?>
             </div>
-            <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-</div>
+          </section>
+        
+        
+     
 <?php
 endif;
 }
-
+}
 add_action('woocommerce_before_add_to_cart_quantity','quantity_title');
 function quantity_title(){
   echo '<div class=" qte">Quantite</div>';
@@ -361,7 +430,7 @@ function custom_woocommerce_get_catalog_ordering_args( $args ) {
   }
   else{
     if($orderby_value=="price"){
-echo $orderby_value;
+
       $args['orderby'] = 'meta_value_num';
 		$args['order'] = 'DESC';
 		$args['meta_key'] = '_price';
@@ -383,7 +452,8 @@ if(have_posts()){?>
 <div class="row">
    <?php while(have_posts()){
      the_post();?>
-   <div class="col-lg-4">
+   <div class="col-lg-4 mb-4">
+ 
    <?php
       $price = get_post_meta($post->ID,'_price',true);?>
 <a href="<?php echo get_the_permalink();?>" >
@@ -391,16 +461,179 @@ if(have_posts()){?>
  echo the_post_thumbnail();
 }?>
 </a>
+    <div class=" text-center">
+    <div class="ft">
 <?php
   
-echo the_title().' ';
-echo $price;
+echo the_title().' ';?>
+</div>
+<?php do_action( 'woocommerce_after_shop_loop_item_title' );?>
+
+<?php
 woocommerce_external_add_to_cart();?>
+
+</div>
 </div>
 <?php
 }?>
 </div>
   <?php }
+  }
+}
+// Disable all payment gateways on the checkout page and replace the "Pay" button by "Place order"
+add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
+add_action( 'woocommerce_before_main_content', 'remove_storefront_before_content');
+
+function remove_storefront_before_content(){
+ remove_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
+
+}
+add_action( 'woocommerce_before_main_content', 'change_bio_before_content');
+
+function change_bio_before_content(){?>
+  <div id="primary" class="container">
+			<main id="main" class="site-main" role="main">
+		<?php
+}
+ add_action( 'woocommerce_after_cart_table_change','after_bio_cart_items' ); 
+ if(!function_exists ('after_bio_cart_items')){
+   function after_bio_cart_items(){?>
+<section class=" zone animate__animated">
+		  <div class="row">
+<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
+margin-bottom: 13px;">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/57376501-bio-icon.jpg" style="width: 132px;">
+<div>All Our products Re 100% pure</div>
+</div>
+<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
+margin-bottom: 13px;">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
+<div>24 X 7 Clients Support</div>
+</div>
+<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
+margin-bottom: 13px;">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
+<div>Free Shipping And fast Delivery </div>
+</div>
+<div class="col-2 offset-md-1" style="border-right: 1px solid #c6c6c6;
+margin-bottom: 13px;">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
+<div>Cash On delivrey</div>
+</div>
+</div>
+
+		  </section>
+<?php
+   }
+ }
+ add_action( 'storefront_page', 'remove_storefront_page_header',10);
+ function remove_storefront_page_header(){
+ 
+  remove_action( 'storefront_page', 'storefront_page_header', 10 );
+   
+}
+/*
+add_filter('woocommerce_form_field','edit_form_fields_checkout_page',10,3);
+if(!function_exists('edit_form_fields_checkout_page')){
+  function edit_form_fields_checkout_page($key,$args,$value){
+
+
+  }
+}
+*/
+
+
+add_filter('woocommerce_form_field_args','change_behave_form_fields',10,3);
+function change_behave_form_fields($args, $key, $value){
+
+//var_dump($args);
+
+if($args['id']=='billing_first_name'){
+$args['class'][]="class123";
+}
+
+return $args;
+
+}
+//remove header ,sidebarmfooter in checkout page
+add_action ('wp','remove_header_footer_checkout_page');
+function remove_header_footer_checkout_page(){
+  if(is_checkout()){
+  remove_all_actions( 'storefront_header' );
+  remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
+  remove_action( 'storefront_footer', 'storefront_footer_widgets', 10 );
+  }
+}
+
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+ 
+add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
+
+ 
+add_action( 'woocommerce_checkout_billing', 'bbloomer_checkout_step2' );
+ 
+function bbloomer_checkout_step2() {
+   echo '<p class="steps">STEP1</p>';
+}
+ 
+add_action( 'woocommerce_checkout_before_order_review_heading', 'bbloomer_checkout_step3' );
+ 
+function bbloomer_checkout_step3() {
+   echo '<p class="steps">STEP2</p>';
+}
+
+function wc_remove_checkout_fields( $fields ) {
+
+  // Billing fields
+  unset( $fields['billing']['billing_company'] );
+  unset( $fields['billing']['billing_address_2'] );
+
+  unset( $fields['billing']['billing_state'] );
+
+  return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
+
+add_filter('woocommerce_checkout_fields','custom_override_checkout_fields');
+function custom_override_checkout_fields($fields){
+  $fields['billing']['billing_address_1']['label']='Adresse';
+  return $fields;
+}
+
+add_action( 'storefront_page', 'storefront_page_header', 10 );
+function storefront_page_header(){
+  if(is_checkout()){
+    the_title('<div class="title-checkout">','</div>');  }
+    else {
+      if(is_cart()){
+        the_title('<div class="title-checkout">','</div>');  
+
+      }
+    }
+}
+add_action('display_featured_products','edit_featured_products',10);
+if(function_exists('edit_featured_products')){
+  function edit_featured_products(){
+    $meta_query=WC()->query->get_meta_query();
+    $tax_query=WC()->query->get_tax_query();
+    $tax_query[]=array(
+      'taxonomy'=>'product_visibility',
+      'field'=>'name',
+      'terms'=>'featured',
+      'operator'=>'IN',
+    );
+    $args=array(
+      'post_type'=>'product',
+      'post_status'=>'publish',
+      'posts_per_page'=>'5',
+      'meta_query'=>$meta_query,
+      'tax_query'=>$tax_query
+    );
+    $featured_query=New WP_Query($args);
+    if($featured_query->have_posts()){
+      
+    }
   }
 }
 ?>

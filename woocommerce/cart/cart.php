@@ -14,12 +14,11 @@
  * @package WooCommerce/Templates
  * @version 3.8.0
  */
-
 defined( 'ABSPATH' ) || exit;
 
 do_action( 'woocommerce_before_cart' ); ?>
 
-<form class="sanaa woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
+<form class="sanaa woocommerce-cart-form col-lg-8 col-md-12 col-sm-12" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
 
 	<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
@@ -45,8 +44,9 @@ do_action( 'woocommerce_before_cart' ); ?>
 					$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 					?>
 					<tr class="woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
-
-						<td class="product-remove">
+<!-- 						<td class="product-remove">
+ -->
+						<td class="">
 							<?php
 								echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									'woocommerce_cart_item_remove_link',
@@ -161,7 +161,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
 
-<div class="cart-collaterals">
+<div class="cart-collaterals col-lg-5 col-md-12 col-sm-12">
 	<?php
 		/**
 		 * Cart collaterals hook.
@@ -173,4 +173,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 	?>
 </div>
 
-<?php do_action( 'woocommerce_after_cart' ); ?>
+<?php do_action( 'woocommerce_after_cart' );
+
+?>
