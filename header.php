@@ -30,7 +30,7 @@
 	<?php do_action( 'storefront_before_header' ); ?>
 
 <header id="masthead" class="<?php if (is_front_page()){?> header-container background-costume" <?php }else { echo '"';};?> role="banner" style="<?php storefront_header_styles();  if (is_front_page()):
- echo 'background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/05/slider_main_2.jpg)';endif; ?>" >
+ echo 'background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/4f523094d6ec66a1d01d8284fe898a82.jpg)';endif; ?>" >
 
 		<?php
 		/**

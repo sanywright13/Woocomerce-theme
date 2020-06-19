@@ -17,11 +17,20 @@ function startwordpress_scripts() {
       wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
 
       wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
+   wp_enqueue_style( 'google_web_fonts', 'https://fonts.googleapis.com/css2?family=Bitter:ital@1&display=swap' );
+   wp_enqueue_style( 'google_web_fonts', 'https://fonts.googleapis.com/css2?family=Kanit' );
 
   }
   
-
-
+//specific images sizes 
+add_image_size('products_front_page',250,350,true);
+add_image_size('category_sizes',500,283,true);
+add_action( 'woocommerce_after_shop_loop_item', 'remove_woocommerce_template_loop_product_link_close',2);
+function remove_woocommerce_template_loop_product_link_close(){
+  if(is_front_page()){
+  remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+  }
+}
 add_action('storefront_header','remove_brand');
 function remove_brand(){
   remove_action('storefront_header', 'storefront_site_branding',20);
@@ -145,10 +154,6 @@ remove_action( 'storefront_header', 'storefront_product_search', 40 );
 
 }
 
-
-
-
-
 add_action( 'storefront_homepage', 'remove_storefront_homepage_header',9);
 if(! function_exists('remove_storefront_homepage_header')){
   function remove_storefront_homepage_header(){
@@ -211,12 +216,7 @@ $tr=get_queried_object()->name;?>
 <h1 class="woocommerce-products-header__title page-title"><?php echo $tr;?></h1>
 <?php
 }
-add_action('emails_form','add_homepage_email_form',10);
-function add_homepage_email_form(){
- if( is_front_page()){ ?>
-<div class="splash"><div class="row"></div><div class="col-lg-12"><div class="">Emails</div></div></div>
- <?php }
-}
+
 /*
 add_action('storefront_content_top','theme_description',14);
 function theme_description(){
@@ -230,27 +230,40 @@ add_action('storefront_content_top','bio_theme_categories',10);
 
 function bio_theme_categories(){
 if(is_front_page()){?>
-  <section class="bio_category_desc animate__animated row mt-5 ">
+  <section class="bio_category_desc animate__animated row mt-3 ">
 		  <div class="container mt-5" >
 <div class="row">
 <div class="col-lg-6">
 <a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
-<img src=" http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/produits-cosmetiques-lhuile-argan-botanika.jpg" alt=" ">
+<?php $image=wp_get_attachment_image_src(142, 'category_sizes');
+?>
+
+<img src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
+height: 326px;">
+<!--
   <p class="des-front">Tous les produits ma Bio sont bio et purs
   Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
   </p>
+-->
   <span class="save">Save 20%</span>
-
+<div class="sadiq">Voir Categorie</div>
 </a>
 </div>
 
 <div class="col-lg-6">
+  <?php $image=wp_get_attachment_image_src(141, 'category_sizes');?>
+
 <a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/huile-d-argan-60-ml.jpg" alt="" >
+<img src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
+height: 326px;">
+<!--
 <p class="des-front">Achetez maintenant et économisez 20%
 Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
 </p>
+-->
 <span class="save">Save 20%</span>
+<div class="sadiq">Voir Categorie</div>
+
 
 </a>
 </div>
@@ -278,12 +291,13 @@ function section_categories(){
 }
 }
 */
+
 add_action('storefront_page','section_laivraison',22);
 function section_laivraison(){
   if(is_front_page()){
 $args=array(
 	'post_type' => 'product',
-  'posts_per_page'=>'4',
+  'posts_per_page'=>'8',
   
 ) ;
 $loop=new WP_Query($args);
@@ -291,29 +305,32 @@ $loop=new WP_Query($args);
 if($loop->have_posts()):
   ?>
   <section class="produits container mb-5">
-<h2 class="text-center mini-title m-4">NOS PRODUITS & SERVICES
+<h2 class="text-center mini-title m-4">Nouveaux Produits
 </h2>
 <div class="row mt-5">
-              <?php $i=1 ;
+              <?php
               while($loop->have_posts()):
                   $loop->the_post();?>
                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 product-item">
                    <?php
-        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"medium");
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"products_front_page");
                   ?>
-               
-              <?php  echo '<a href="'.get_permalink( $loop->post->ID).'"><img src="'.$image[0].'" class="hvr-bounce-out" style="width: 99%;
-height: 374px;"/></a>';
-              ?>  <div class="product_info"> <div class="titre-produit "><?php the_title() ;?></div>
+                                    <span class="new-box"><span class="new-label">Neuf</span></span>
+
+              <?php  echo '<a href="'.get_permalink( $loop->post->ID).'">
+              <img src="'.$image[0].'" class="hvr-bounce-out">
+              </a>';
+              ?>  
+              <div class="product_info">
+                <div class="titre-produit "><?php echo the_title() ;?>
+              </div>
              
               <?php do_action( 'woocommerce_after_shop_loop_item_title' );
-  echo '<span>'. do_action( 'woocommerce_after_shop_loop_item' ).' <span>';
- 
-  ?>
+                    do_action( 'woocommerce_after_shop_loop_item' );?>
   </div>
                 </div>
                
-              <?php $i=$i+1; endwhile; ?>
+              <?php endwhile; ?>
             </div>
           </section>
         
@@ -457,9 +474,12 @@ if(have_posts()){?>
    <?php
       $price = get_post_meta($post->ID,'_price',true);?>
 <a href="<?php echo get_the_permalink();?>" >
-<?php if(has_post_thumbnail()){
- echo the_post_thumbnail();
-}?>
+<?php          $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ),"products_front_page");
+
+echo '<a href="'.get_permalink( $post->ID).'">
+              <img src="'.$image[0].'" class="hvr-bounce-out" style="margin:auto;">
+              </a>';
+              ?> 
 </a>
     <div class=" text-center">
     <div class="ft">
@@ -613,7 +633,7 @@ function storefront_page_header(){
     }
 }
 add_action('display_featured_products','edit_featured_products',10);
-if(function_exists('edit_featured_products')){
+if(!function_exists('edit_featured_products')){
   function edit_featured_products(){
     $meta_query=WC()->query->get_meta_query();
     $tax_query=WC()->query->get_tax_query();
@@ -626,14 +646,38 @@ if(function_exists('edit_featured_products')){
     $args=array(
       'post_type'=>'product',
       'post_status'=>'publish',
-      'posts_per_page'=>'5',
+      'posts_per_page'=>'6',
       'meta_query'=>$meta_query,
       'tax_query'=>$tax_query
     );
     $featured_query=New WP_Query($args);
-    if($featured_query->have_posts()){
-      
+    if($featured_query->have_posts()){?>
+    <div class="featured-products text-center">Produits Similaires</div>
+    <div class="row justify-content-center mt-5 p-2">
+    
+    <?php
+      while($featured_query->have_posts()){
+$featured_query->the_post();?>
+<div class="col-lg-3 col-md-4 col-sm-3 col-2 ">
+<?php $product=wc_get_product($featured_query->post->ID);
+
+$product_img=woocommerce_get_product_thumbnail('woocommerce_thumbnail');?>
+<a href="<?php echo esc_url(get_the_permalink($featured_query->post->ID));?>">
+<?php echo $product_img;?>
+</a><div class="text-center">
+       <?php echo '<div class="pro-title ">'.ucwords(get_the_title($featured_query->post->ID)).'</div>';
+       echo '<div>'.$product->get_price().'</div>';
+       $rating=$product->get_average_rating();?>
+      <div class="rating"><?php echo wc_get_rating_html($rating);?></div>
+   
+      </div>
+</div>
+        <?php
+      }?>
+      </div>
+      <?php
     }
   }
 }
+
 ?>

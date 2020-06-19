@@ -35,12 +35,9 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 	<?php	 if(is_cart()) {do_action( 'woocommerce_after_cart_table_change');?>
-		<div class="container">
-			<div class="row">
-	<?php //echo do_action('display_featured_products');
+	
+	<?php echo do_action('display_featured_products');
 } ?>
-	</div>
-	<div>
 <?php
 do_action( 'storefront_sidebar' );
 get_footer();

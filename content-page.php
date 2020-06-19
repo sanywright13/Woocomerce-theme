@@ -28,6 +28,7 @@
 
 
 if(is_front_page()){?>
+<!--
 <section class="mb-4">
           <div class="featured-image3 " style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/christin-hume-0MoF-Fe0w0A-unsplash-scaled.jpg);">
 <div class="overlay"></div>
@@ -47,23 +48,79 @@ Hurry Up ! Get Exacting Discount Of All Cosmetic Item. </div>
               </div>
           
           </section>
-
+-->
 		
-	<?php	  do_action( 'woocommerce_after_cart_table_change'); ?>
 		  <section class="conta">
 			  <div class="container">
 				  <div class="row">
-					  <div class="col-12">
+					  <div class="col-12 animate__animated">
 		  <div class="text-center title">LE GRAND LIVRE DES INGRÉDIENTS</div>
 <div class="der">Pour survivre à leur environnement, les plantes ont développé des propriétés parfois étonnantes, qui en font de véritables merveilles de technologie naturelles. En incluant ces ingrédients dans ses cosmétiques, Biorosan capitalise sur les vertus et bienfaits de ces plantes. Dans son Grand Livre des Ingrédients, Biorosan vous partage sa passion pour une grande variété d’ingrédients verts issus d’un savoir-faire transmis de génération en génération.
+<div style="margin-top: 22px;"><img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Argan-Oil-Hair-Care-Treatment-Essence-Fast-Powerful-Hair-Growth-Liquid-Hair-Loss-Products-Serum-Repair-1.jpg" style="margin: auto;height: 500px;"></div>
 </div>
 </div>
-<div class="col-6 " style="margin: auto; margin-top: 1em;">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/HUILE-ARGAN.jpg" >
+<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+<div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<?php 
+$product=wc_get_product(103);
+$description=$product->get_description();
+
+
+$image_prod=wp_get_attachment_image_src(151,'products_front_page')?>
+<a href="<?php echo esc_url(get_the_permalink(103));?>">
+<img src="<?php echo $image_prod[0]; ?>" alt="" height="<?php echo $image_prod[1];?>" width="<?php echo $image_prod[2];?>" class="hvr-bounce-out animate__animated">
+<?php echo $description; ?>
+</a>
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+<div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<?php 
+$product=wc_get_product(117);
+$description=$product->get_description();
+$image_prod=wp_get_attachment_image_src(150,'products_front_page')?>
+<a href="<?php echo esc_url(get_the_permalink(117));?>">
+
+<img src="<?php echo $image_prod[0]; ?>" alt="" height="<?php echo $image_prod[1];?>" width="<?php echo $image_prod[2];?>" class="hvr-bounce-out animate__animated">
+<?php echo $description; ?>
+
+</a>
+</div>
+
+<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+<div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<?php 
+$product=wc_get_product(118);
+$description=$product->get_description();
+$image_prod=wp_get_attachment_image_src(153,'products_front_page')?>
+<a href="<?php echo esc_url(get_the_permalink(118));?>">
+
+<img src="<?php echo $image_prod[0]; ?>" alt="" height="<?php echo $image_prod[1];?>" width="<?php echo $image_prod[2];?>" class="hvr-bounce-out animate__animated">
+<?php echo $description; ?>
+
+</a>
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+<div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<?php 
+$product=wc_get_product(118);
+$description=$product->get_description();
+$image_prod=wp_get_attachment_image_src(153,'products_front_page')?>
+<a href="<?php echo esc_url(get_the_permalink(118));?>">
+
+<img src="<?php echo $image_prod[0]; ?>" alt="" height="<?php echo $image_prod[1];?>" width="<?php echo $image_prod[2];?>" class="hvr-bounce-out animate__animated">
+<?php echo $description; ?>
+
+</a>
 </div>
 </div>
+
 </div>
+<div class="d-flex  justify-content-center">Argan Oil Benefits: Top 12 Uses for Healthy Skin and Hair - Dr. Axe. What is argan oil? It's an all-natural alternative to chemical-laden beauty products .</div>
+
+
 </section>
-<?php do_action('emails_form') ;
+<?php	  do_action( 'woocommerce_after_cart_table_change'); ?>
+
+<?php
 }?>
 </article><!-- #post-## -->
