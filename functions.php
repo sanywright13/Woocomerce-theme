@@ -20,6 +20,7 @@ function startwordpress_scripts() {
    wp_enqueue_style( 'google_web_fonts1', 'https://fonts.googleapis.com/css2?family=Bitter:ital@1&display=swap' );
    wp_enqueue_style( 'google_web_fonts2', 'https://fonts.googleapis.com/css2?family=Kanit' );
    wp_enqueue_style( 'google_web_fonts3', 'https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap' );
+   wp_enqueue_style( 'google_web_fonts4', 'https://fonts.googleapis.com/css2?family=Amiri&display=swap' );
 
   }
   
@@ -70,20 +71,39 @@ if ( ! function_exists( 'website_header_cart' ) ) {
 			} else {
 				$class = '';
 			}
-			?>
-		<ul id="site-header-cart" class="site-header-cart menu">
+      ?>
+      <div class="pr-5" style="width:323px;">
+		<ul id="site-header-cart " class="site-header-cart menu">
 			<li class="<?php echo esc_attr( $class ); ?>">
 				<?php storefront_cart_link(); ?>
 			</li>
 			<li>
 				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
 			</li>
-		</ul>
+    </ul>
+    </div>
 			<?php
 		}
 	}
 }
+// Add Shortcode
+function custom_mini_cart() {
 
+	echo '<a href="#" class="dropdown-back" data-toggle="dropdown"> ';
+	    echo '<i class="fa fa-shopping-cart" aria-hidden="true"></i>';
+	    echo '<div class="basket-item-count" style="display: inline;">';
+	        echo '<span class="cart-items-count count">';
+	            echo WC()->cart->get_cart_contents_count();
+	        echo '</span>';
+	    echo '</div>';
+	echo '</a>';
+	echo '<ul class="dropdown-menu dropdown-menu-mini-cart">';
+	        echo '<li> <div class="widget_shopping_cart_content">';
+	                  woocommerce_mini_cart();
+	            echo '</div></li></ul>';
+
+}
+add_shortcode('custom-mini-cart','custom_mini_cart');
 //add menu 
 add_action('init','bio_add_header_menu');
 function bio_add_header_menu(){
@@ -92,11 +112,27 @@ function bio_add_header_menu(){
 function add_new_header_nav(){
 ?> 
 
+<div class="d-flex justify-content-between" style="background-color: #f9f9f9;">
+<div class="call">
+<i class="fas fa-phone-square-alt pr-2"></i>0650481844
 
+</div>
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" class="img-fluid" alt="" style="max-width: 120px;">
+
+
+<?php do_action('website_header');
+//echo do_shortcode('[custom-mini-cart]');
+?>
+
+ </div>
 <div class="navbar navbar-expand-lg navbar-light bg-light" >
  
  
+
+
+
  <div class="row" style="width:100%">
+<!--
  <div class="  call col-lg-2 col-md-4 col-sm-4 ">
  <i class="fas fa-phone-square-alt pr-2"></i>0650481844
 </div>
@@ -106,10 +142,12 @@ function add_new_header_nav(){
 </div>
 
 <div class="col-lg-3 offset-lg-12 col-md-4 ml-auto">
-<?php do_action('website_header');?>
+<?php //do_action('website_header');
+echo do_shortcode('[custom-mini-cart]');
+?>
 
 </div>
-
+-->
  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"><i class="fas fa-list-alt"></i></span>
 </button>
@@ -325,11 +363,11 @@ if($loop->have_posts()):
               <?php
               while($loop->have_posts()):
                   $loop->the_post();?>
-                   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 product-item">
+                   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                    <?php
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"products_front_page");
                   ?>
-                 
+                 <div class="product-item">
                                     <span class="new-box"><span class="new-label">Neuf</span></span>
                                     <div class="produit-details">
               <?php  echo '<a href="'.get_permalink( $loop->post->ID).'">
@@ -337,11 +375,12 @@ if($loop->have_posts()):
               </a>';
               ?>  
               <div class="product_info">
-                <div class="titre-produit "><?php echo the_title() ;?>
+                <div class="titre-produit "><h2><?php echo the_title() ;?></h2>
               </div>
              
               <?php do_action( 'woocommerce_after_shop_loop_item_title' );
                     do_action( 'woocommerce_after_shop_loop_item' );?>
+  </div>
   </div>
                 </div>
               </div>
@@ -428,28 +467,28 @@ function change_bio_before_content(){?>
  if(!function_exists ('after_bio_cart_items')){
    function after_bio_cart_items(){?>
 <section class=" zone animate__animated">
-		  <div class="row">
-<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
-margin-bottom: 13px;">
+
+<div class=" d-flex  justify-content-around">
+  <div class="p-2  bd-highlight"><div class="ban">
 <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/57376501-bio-icon.jpg" style="width: 132px;">
 <div>All Our products Re 100% pure</div>
+</div></div>
+  <div class="p-2  bd-highlight"><div class="ban">
+  <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
+<div>All Our products Re 100% pure</div>
+</div></div>
+  <div class="p-2  bd-highlight">
+    <div class="ban">
+    <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
+<div>All Our products Re 100% pure</div>
+</div></div>
+<div class="p-2  bd-highlight">
+    <div class="ban">
+    <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
+<div>All Our products Re 100% pure</div>
+</div></div>
 </div>
-<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
-margin-bottom: 13px;">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
-<div>24 X 7 Clients Support</div>
-</div>
-<div class="col-2 offset-md-1 " style="border-right: 1px solid #c6c6c6;
-margin-bottom: 13px;">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
-<div>Free Shipping And fast Delivery </div>
-</div>
-<div class="col-2 offset-md-1" style="border-right: 1px solid #c6c6c6;
-margin-bottom: 13px;">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
-<div>Cash On delivrey</div>
-</div>
-</div>
+
 
 		  </section>
 <?php
@@ -626,4 +665,19 @@ add_action( 'wp', function() {
   remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20 );
   remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
 } );
+add_action( 'woocommerce_shop_loop_item_title', 'remove_woocommerce_template_loop_product_title', 9 );
+function remove_woocommerce_template_loop_product_title(){
+remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+}
+
+add_action('woocommerce_shop_loop_item_title','edit_shop_title_product',10);
+if ( ! function_exists( 'edit_shop_title_product' ) ) {
+
+	/**
+	 * Show the product title in the product loop. By default this is an H2.
+	 */
+	function edit_shop_title_product() {
+		echo '<div class="titre-produit"><h2 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2></div>';
+	}
+}
 ?>

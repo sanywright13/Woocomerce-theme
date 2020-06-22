@@ -24,7 +24,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<div  class=" col-lg-3 mb-2 product-item" <?php wc_product_class( '', $product ); ?>>
+<div  class="<?php if(is_product()){ echo 'col-lg-2';} else {echo 'col-lg-3';}?> col-md-4  col-sm-6 col-6 mb-2 product-item" <?php wc_product_class( '', $product ); ?>>
 	<?php
 	/**
 	 * Hook: woocommerce_before_shop_loop_item.
@@ -32,7 +32,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_template_loop_product_link_open - 10
 	 */
 	do_action( 'woocommerce_before_shop_loop_item' );
-
+echo '<div class="produit-details">';
 	/**
 	 * Hook: woocommerce_before_shop_loop_item_title.
 	 *
@@ -47,6 +47,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 *
 	 * @hooked woocommerce_template_loop_product_title - 10
 	 */
+	echo '<div class="product_info">';
 	do_action( 'woocommerce_shop_loop_item_title' );
 
 	/**
@@ -56,7 +57,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_template_loop_price - 10
 	 */
 	do_action( 'woocommerce_after_shop_loop_item_title' );
-
+echo '</div>';
 	/**
 	 * Hook: woocommerce_after_shop_loop_item.
 	 *
@@ -65,5 +66,6 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
 	?>
+	</div>
 	</div>
 </div>
