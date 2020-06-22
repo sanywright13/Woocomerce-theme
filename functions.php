@@ -17,8 +17,9 @@ function startwordpress_scripts() {
       wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
 
       wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
-   wp_enqueue_style( 'google_web_fonts', 'https://fonts.googleapis.com/css2?family=Bitter:ital@1&display=swap' );
-   wp_enqueue_style( 'google_web_fonts', 'https://fonts.googleapis.com/css2?family=Kanit' );
+   wp_enqueue_style( 'google_web_fonts1', 'https://fonts.googleapis.com/css2?family=Bitter:ital@1&display=swap' );
+   wp_enqueue_style( 'google_web_fonts2', 'https://fonts.googleapis.com/css2?family=Kanit' );
+   wp_enqueue_style( 'google_web_fonts3', 'https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap' );
 
   }
   
@@ -96,15 +97,15 @@ function add_new_header_nav(){
  
  
  <div class="row" style="width:100%">
- <div class=" call col-2 ">
+ <div class="  call col-lg-2 col-md-4 col-sm-4 ">
  <i class="fas fa-phone-square-alt pr-2"></i>0650481844
 </div>
 
-<div class="col-2 offset-md-3">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" alt="">
+<div class="col-lg-2 offset-lg-3 col-md-4 col-sm-8">
+<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" class="img-fluid" alt="">
 </div>
 
-<div class="col-3 offset-md-2 ml-auto">
+<div class="col-lg-3 offset-lg-12 col-md-4 ml-auto">
 <?php do_action('website_header');?>
 
 </div>
@@ -121,17 +122,10 @@ function add_new_header_nav(){
         'container_class'=>'collapse navbar-collapse',
         'container_id'      => 'navbarTogglerDemo01',
         'menu_class'=>' navbar-nav mr-auto mt-2 mt-lg-0',
-
-       
-      )
+ )
     );
 
     ?>
-   
- <?php the_widget( 'WC_Widget_Product_Search', 'title=' ); ?>
-
-   
-
   </div>
   
   </div><!-- #site-navigation -->
@@ -140,6 +134,26 @@ function add_new_header_nav(){
 
 
 add_action('storefront_header','add_new_header_nav',50);
+
+//add search into nav list li 
+add_filter('wp_nav_menu_items','add_search_tags_nav_header',10,2);
+
+function add_search_tags_nav_header($items, $args){
+ if($args->theme_location=="header_menu")
+  $items .= '</ul><ul class="navbar-nav">
+ 
+  <li id="menu-item-128" class="menu-item menu-item-type-post_type  menu-item-128">
+<form role="search" method="get" class="woocommerce-product-search form-inline my-2 my-lg-0" action="'.esc_url( home_url( '/' ) ).'">
+	<label class="screen-reader-text" for="woocommerce-product-search-field-">'.esc_html_e( '', 'woocommerce' ).'</label>
+	<input type="search" id="woocommerce-product-search-field-" class="search-field form-control mr-sm-2" placeholder="'.esc_attr__( 'Search products&hellip;', 'woocommerce' ).'" value="'.get_search_query().'" name="s" />
+	<button type="submit" class="btn btn-success my-2 my-sm-0" value="'.esc_attr_x( 'Search', 'submit button', 'woocommerce' ).'">'.esc_html_x( 'Search', 'submit button', 'woocommerce' ).'</button>
+	<input type="hidden" name="post_type" value="product" />
+</form></li></ul>
+';  
+ 
+
+return $items;
+}
 
 
 add_action( 'storefront_header', 'remove_storefront_primary_navigation_wrapper_close');
@@ -171,7 +185,7 @@ if(! function_exists('remove_storefront_page_header')){
 //add a filter to hook the title of shop page and change iterator_apply
 function change_title_shop(){
  if(is_archive('shop')){?>
-		<h1 class="woocommerce-products-header__title page-title"><?php echo 'New Arrivals'; ?></h1>
+		<h1 class="woocommerce-products-header__title page-title"><?php echo 'Nos Produits'; ?></h1>
 
 <?php
 }
@@ -235,7 +249,7 @@ if(is_front_page()){?>
 <div class="row">
 <div class="col-lg-6">
 <a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
-<?php $image=wp_get_attachment_image_src(142, 'category_sizes');
+<?php $image=wp_get_attachment_image_src(157, 'category_sizes');
 ?>
 
 <img src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
@@ -251,7 +265,7 @@ height: 326px;">
 </div>
 
 <div class="col-lg-6">
-  <?php $image=wp_get_attachment_image_src(141, 'category_sizes');?>
+  <?php $image=wp_get_attachment_image_src(158, 'category_sizes');?>
 
 <a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
 <img src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
@@ -304,7 +318,7 @@ $loop=new WP_Query($args);
 
 if($loop->have_posts()):
   ?>
-  <section class="produits container mb-5">
+  <section class="produits container ">
 <h2 class="text-center mini-title m-4">Nouveaux Produits
 </h2>
 <div class="row mt-5">
@@ -315,8 +329,9 @@ if($loop->have_posts()):
                    <?php
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"products_front_page");
                   ?>
+                 
                                     <span class="new-box"><span class="new-label">Neuf</span></span>
-
+                                    <div class="produit-details">
               <?php  echo '<a href="'.get_permalink( $loop->post->ID).'">
               <img src="'.$image[0].'" class="hvr-bounce-out">
               </a>';
@@ -329,6 +344,7 @@ if($loop->have_posts()):
                     do_action( 'woocommerce_after_shop_loop_item' );?>
   </div>
                 </div>
+              </div>
                
               <?php endwhile; ?>
             </div>
@@ -350,115 +366,8 @@ function remove_description_tabs($tabs){
   if(isset($tabs['description'])) unset($tabs['description']);
   return $tabs;
 }
-
-add_action( 'woocommerce_before_shop_loop_2', 'change_woocommerce_catalog_ordering',15);
-function change_woocommerce_catalog_ordering(){
-
-  if ( ! wc_get_loop_prop( 'is_paginated' ) || ! woocommerce_products_will_display() ) {
-    return;
-  }
-  $show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
-  $catalog_orderby_options = apply_filters(
-    'woocommerce_catalog_orderby',
-    array(
-      'menu_order' => __( 'Default sorting', 'woocommerce' ),
-      'popularity' => __( 'Sort by popularity', 'woocommerce' ),
-      'rating'     => __( 'Sort by average rating', 'woocommerce' ),
-      'date'       => __( 'Sort by latest', 'woocommerce' ),
-      'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
-      'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
-    )
-  );
-
-  $default_orderby = wc_get_loop_prop( 'is_search' ) ? 'relevance' : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', '' ) );
-  $orderby         = isset( $_GET['orderby'] ) ? wc_clean( wp_unslash( $_GET['orderby'] ) ) : $default_orderby; // WPCS: sanitization ok, input var ok, CSRF ok.
-
-  if ( wc_get_loop_prop( 'is_search' ) ) {
-    $catalog_orderby_options = array_merge( array( 'relevance' => __( 'Relevance', 'woocommerce' ) ), $catalog_orderby_options );
-
-    unset( $catalog_orderby_options['menu_order'] );
-  }
-
-  if ( ! $show_default_orderby ) {
-    unset( $catalog_orderby_options['menu_order'] );
-  }
-
-  if ( ! wc_review_ratings_enabled() ) {
-    unset( $catalog_orderby_options['rating'] );
-  }
-
-  if ( ! array_key_exists( $orderby, $catalog_orderby_options ) ) {
-    $orderby = current( array_keys( $catalog_orderby_options ) );
-  }
-
-  wc_get_template(
-    'loop/orderby.php',
-    array(
-      'catalog_orderby_options' => $catalog_orderby_options,
-      'orderby'                 => $orderby,
-      'show_default_orderby'    => $show_default_orderby,
-    )
-  );
-}
-
-
-add_action('pre_get_posts','order_category_loop',10);
-
-function order_category_loop($query){
- if(is_tax('product_cat') && $query->is_main_query()){
-   /*
-if(isset($_GET['orderby'])){
-  $arg=$_GET['orderby'];
-
-}
-else{
-  $arg='title';
-}
-
-if(isset($arg) &&  esc_html($arg)=="price") {
-
  
 
-   $query->set('orderby','meta_value_num');
-   $query->set('meta_key','_price');
-  $query->set('order','ASC');*/
-  $query->set('posts_per_page',10);
-/*
-}
-else{
-
-$query->set('orderby','meta_value_num');
-$query->set('meta_key',"_price");
-$query->set('order','DESC');
-$query->set('posts_per_page','20');
-} */
- } 
-
-}
-
-
-add_filter( 'woocommerce_get_catalog_ordering_args', 'custom_woocommerce_get_catalog_ordering_args' );
-function custom_woocommerce_get_catalog_ordering_args( $args ) {
-  $orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-	if ( 'random_list' == $orderby_value ) {
-		$args['orderby'] = 'rand';
-		$args['order'] = '';
-		$args['meta_key'] = '';
-  }
-  else{
-    if($orderby_value=="price"){
-
-      $args['orderby'] = 'meta_value_num';
-		$args['order'] = 'DESC';
-		$args['meta_key'] = '_price';
-    }
-    else if('popularity' == $orderby_value){
-      $args['orderby']  = ['menu_order' => 'DESC', 'meta_value_num' => 'DESC'];
-      $args['meta_key'] = 'total_sales';
-    }
-  }
-	return $args;
-}
 add_action('woocommerce_loop_category','add_loop_category',10);
 if(!function_exists('add_loop_category')){
   function add_loop_category(){
@@ -469,7 +378,7 @@ if(have_posts()){?>
 <div class="row">
    <?php while(have_posts()){
      the_post();?>
-   <div class="col-lg-4 mb-4">
+   <div class="product-item col-lg-4 mb-4">
  
    <?php
       $price = get_post_meta($post->ID,'_price',true);?>
@@ -604,12 +513,14 @@ function bbloomer_checkout_step3() {
 }
 
 function wc_remove_checkout_fields( $fields ) {
-
   // Billing fields
+  unset($fields['billing']['billing_last_name']);
+  unset($fields['billing']['billing_postcode']);
+  unset($fields['billing']['billing_state']);
   unset( $fields['billing']['billing_company'] );
   unset( $fields['billing']['billing_address_2'] );
-
-  unset( $fields['billing']['billing_state'] );
+  unset( $fields['billing']['billing_address_1'] );
+  unset( $fields['billing']['billing_email'] );
 
   return $fields;
 }
@@ -618,7 +529,13 @@ add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
 add_filter('woocommerce_checkout_fields','custom_override_checkout_fields');
 function custom_override_checkout_fields($fields){
   $fields['billing']['billing_address_1']['label']='Adresse';
+  $fields['billing']['billing_first_name']['label']='Nom Et Prénom';
   return $fields;
+}
+add_filter('woocommerce_default_address_fields','edit_required_field_email');
+function edit_required_field_email($address_field){
+  $address_field['address_1']['required'] = false;
+  return $address_field;
 }
 
 add_action( 'storefront_page', 'storefront_page_header', 10 );
@@ -658,17 +575,18 @@ if(!function_exists('edit_featured_products')){
     <?php
       while($featured_query->have_posts()){
 $featured_query->the_post();?>
-<div class="col-lg-3 col-md-4 col-sm-3 col-2 ">
+<div class="col-lg-2 col-md-4 col-sm-3 col-2 product-item">
 <?php $product=wc_get_product($featured_query->post->ID);
 
 $product_img=woocommerce_get_product_thumbnail('woocommerce_thumbnail');?>
 <a href="<?php echo esc_url(get_the_permalink($featured_query->post->ID));?>">
 <?php echo $product_img;?>
-</a><div class="text-center">
+</a><div class="product_info">
        <?php echo '<div class="pro-title ">'.ucwords(get_the_title($featured_query->post->ID)).'</div>';
        echo '<div>'.$product->get_price().'</div>';
        $rating=$product->get_average_rating();?>
-      <div class="rating"><?php echo wc_get_rating_html($rating);?></div>
+      <div class="rating mb-2"><?php echo wc_get_rating_html($rating);?></div>
+      <?php do_action( 'woocommerce_after_shop_loop_item' );?>
    
       </div>
 </div>
@@ -680,4 +598,32 @@ $product_img=woocommerce_get_product_thumbnail('woocommerce_thumbnail');?>
   }
 }
 
+add_action( 'woocommerce_before_shop_loop_item_title', 'remove_woocommerce_template_loop_product_thumbnail', 2);
+function remove_woocommerce_template_loop_product_thumbnail(){
+  if(is_archive())
+  remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+
+}
+
+add_action( 'woocommerce_before_shop_loop_item_title', 'add_archive_woocommerce_template_loop_product_thumbnail', 10 );
+function add_archive_woocommerce_template_loop_product_thumbnail(){
+if(is_archive()){
+  global $product;
+ 
+  $image=wp_get_attachment_image_src(get_post_thumbnail_id($product->get_id()), 'category_sizes');
+
+?>
+
+<img class="hvr-bounce-out" src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
+height: 326px;">
+<?php }
+}
+add_action('woocommerce_after_single_product_summary','remove_storefront_woocommerce_pagination',22);
+function remove_storefront_woocommerce_pagination(){
+remove_action( 'woocommerce_after_single_product_summary', 'storefront_single_product_pagination', 30 );
+}
+add_action( 'wp', function() {
+  remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20 );
+  remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
+} );
 ?>

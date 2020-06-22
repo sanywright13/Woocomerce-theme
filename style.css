@@ -66,7 +66,7 @@ padding: 0px;
     line-height: 0px;
 }
 .product_info .price{
-    font-size: 22px;
+    font-size: 19px;
 }
 .single_add_to_cart_button.button.alt {
     width: 405px;
@@ -237,24 +237,25 @@ font-size: 2.5rem;
     position: relative;}
     .product_info .buy{   display:none;}
  .buy{
-    background-color: #1e6222ad;
+    background-color: #eaa82c;
     border-radius: 0px;
     color: #fff;
     width: 100%;   
  
 }
 .product-item:hover .buy{
-    display:block;
+    display:inline;
 }
 .shop-now {
     position: relative;
-    top: 364px;
-    right: 132px;
+    top: 279px;
+    right: 71px;
 }
 .titre{
     color: #fff;
-    font-size: 2rem;
-    font-weight: 598;
+    font-size: 2.3rem;
+    font-weight: 386;
+   
 }
 .storefront-breadcrumb {
     padding:0em;
@@ -292,13 +293,13 @@ font-size: 2.5rem;
     line-height: 22px !important;}
 
     .col-lg-4 .single_add_to_cart_button.button.alt {
-        width: 264px;
+        width: 170px;
     }
     .call{
         font-size: 18px;
 color: #1c1d1e;
 font-weight: 500;
-padding-top: 26px;
+padding-top: 7px;
     }
 
     .site-header-cart .cart-contents {
@@ -324,22 +325,23 @@ padding-top: 26px;
     }
     .save{
         position: absolute;
-        left: 72%;
-        top: 9%;
-width: 96px;
-height: 96px;
-background: #df7f39;
-font-size: 27px;
-line-height: 25px;
-padding-top: 22px;
--moz-transition: .3s transform ease;
--o-transition: .3s transform ease;
--webkit-transition: .3s transform ease;
-transition: .3s transform ease;
-display: block;
-border-radius: 50%;
-text-align: center;
-color: #fff;
+        left: 70%;
+        top: 8%;
+        width: 73px;
+        height: 73px;
+        background: #df5e10;
+        font-size: 17px;
+        line-height: 25px;
+        padding-top: 28px;
+        -moz-transition: .3s transform ease;
+        -o-transition: .3s transform ease;
+        -webkit-transition: .3s transform ease;
+        transition: .3s transform ease;
+        display: block;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        font: 14px/17px 'Arial';
     }
     .bio_category_desc p {
         position: relative;
@@ -352,7 +354,11 @@ color: #fff;
     }
     .bio_category_desc a:hover img {
         opacity: 0.8 !important;
-    }
+        transform: translate(14px, 5px);
+        -webkit-transition: .1s ease-in;
+        -moz-transition: .1s ease-in;
+        -ms-transition: .1s ease-in;
+        -o-transition: .1s ease-in;  }
     .bio_category_desc {
         position: relative;
         width: 100%;
@@ -360,7 +366,7 @@ color: #fff;
         display: block;
         padding: .5rem 0 2rem 0;
         border-bottom: 1px solid #DDDDDD;
-        margin-bottom: 2rem;
+        margin-bottom:1rem;
     }
     .product_info {
         padding: 13px 19px;
@@ -369,9 +375,8 @@ color: #fff;
 
    .titre-produit {
             text-transform: uppercase;
-            font-size: 16px;
             color: #282727;
-    
+            font: bold 13px/17px 'Arial';
     }
 
 /* Bounce Out */
@@ -380,9 +385,9 @@ color: #fff;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-    transition: ease-in;
+    -webkit-transition-duration: .22s;
+    transition-duration: .22s;
+    transition: .22s ease-in;
   }
 
   .product-item:hover .hvr-bounce-out{
@@ -393,7 +398,7 @@ color: #fff;
     position: relative;
     top: -11px;
     
-    padding: 8px 56px;
+    padding: 8px 23px;
 }
 .featured-image2{
     height: 505px;
@@ -452,7 +457,7 @@ color: #fff;
         background: #e1845f;
     }
     .second-title{position: relative;
-        top: -66%;
+        top: -77%;
         font-size: 26px;
         color: #fff4ed;}
         
@@ -474,15 +479,11 @@ color: #fff;
             color: #ea1a68;
         }
         .conta {
-            background-color: #f0f0f0;
-            padding: 97px;
+         
             color: #131212;
+            
         }
-        .conta .container .row .col-12{
-            position: relative;
-            top: -34px;
-            left: 11px;
-        }
+        
         .menu-item a:hover {
             color: #4acc37;
            
@@ -513,17 +514,18 @@ color: #000;
             padding-bottom: 13px;
         }
         .title{
-       
-            font-size: 31px;
-            font-weight: 601;
-            color: #f45b11;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 596;
+            color: #33312e;
+           /* font-family: 'Bitter', serif;*/
+            margin: 2em 0em 1em 0em;
+            letter-spacing: -1px;
             }
             .der {
-                padding: 10px 90px;
+                padding: 69px 20px;
                 font-size: 18px;
-                letter-spacing: 2px;
-                font-family: 'Bitter', serif;
+                letter-spacing: 1px;
+                font-family: 'Baloo Chettan 2';
             }
 .icon-text{font-weight: 550;}
 .ft {
@@ -677,7 +679,7 @@ p.form-row {
     margin:auto;
 }
 .featured-products.text-center {
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding-top: 1em;
     color: #50b72b;
     font-weight: 550;
@@ -723,13 +725,13 @@ color:#fff;
         text-transform: uppercase;
         padding: 9px 0 7px;
         text-shadow: 1px 1px rgba(0,0,0,0.24);
-        width: 96px;
+        width: 78px;
         text-align: center;
         display: block;
         position: absolute;
-        left: 20px;
-        top: 16px;
-        z-index: 1;
+        left: -2px;
+        top: 8px;
+        z-index: 28;
         -webkit-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
         transform: rotate(-45deg);
@@ -746,22 +748,24 @@ position:relative;
    a .st{color:     #f4f4f4;
    }
    .st {
-    top: -101px;
-    padding: 0px 0px 0px 6px;
+    top: -118px;
+    padding: 4px 6px 4px 15px;
     background-color: #1617178f;
     max-height: 101px;
     overflow: hidden;
     max-width: 350px;
     display: none;
- 
-    font-size: 1.2rem;
+    font-size: .99rem;
+    font-family: 'Baloo Chettan 2';
+    line-height: 1.15;
 }
 .conta .f-titre{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: center;
     padding: 10px;
     color: #333530;
-    font-weight: 608;
+    font-family: 'Baloo Chettan 2';
+
 }
 .conta  .hvr-bounce-out {
 margin:auto;
@@ -776,16 +780,15 @@ margin:auto;
 
 .bio_category_desc .sadiq {
     position: absolute;
-   display: none;
-   padding: 18px 16px 1rem 18px;
-   background-color: #0e1522a8;
-   left: 270px;
-   top: 140px;
-   color: #fff;
- 
-   font-size: 1.2rem;
-font-weight: 506;
-font-family: 'Bitter', serif;
+    display: none;
+    padding: 10px 15px 10px 18px;
+    background-color: #0e1522a8;
+    left: 270px;
+    top: 140px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 506;
+    font-family: 'Bitter', serif;
 }
 .col-lg-6:hover .sadiq{display:block;}
 .zone .col-2 {font-family: 'Bitter', serif;}
@@ -810,3 +813,51 @@ button.alt:hover, input[type="button"].alt:hover, input[type="reset"].alt:hover,
 .storefront-full-width-content.woocommerce-cart .entry-header h1:last-child, .storefront-full-width-content.woocommerce-checkout .entry-header h1:last-child, .storefront-full-width-content.woocommerce-account .entry-header h1:last-child, .storefront-full-width-content .woocommerce-products-header h1:last-child {
     margin-bottom: 9px;
 }
+.woocommerce-message, .woocommerce-info, .woocommerce-error, .woocommerce-noreviews, p.no-comments{
+    background-color: #a4a4a4;
+margin-left: 0;
+border-radius: 2px;
+color: #040404;
+font-size: 1.1rem;
+}
+footer h3{ color:#f7af27;}
+footer a {
+    color:    #a4a4a4;
+
+}
+
+.short-images:hover a img{ transform: scale(1.1);
+    transition: .4s all ease;}
+.short-images{width: 81%;margin: auto;
+}
+.short-images a {
+    overflow: hidden;
+    height: 320px;
+    display: block;
+    margin: auto;
+}
+.produit-details {
+    width: 72%;
+}
+ .new-box .produit-details{
+    overflow: hidden;
+}
+.woocommerce-pagination .page-numbers li .page-numbers.current {
+    background-color: #caaa2b;
+    color: #151515;
+}
+.pagination .page-numbers li .page-numbers, .woocommerce-pagination .page-numbers li .page-numbers {
+    border-left-width: 0;
+    display: inline-block;
+    padding: 0.3342343017em 0.875em;
+    background-color: rgba(242, 219, 94, 0.91);
+    color: #43454b;
+}
+#billing_address_1_field{
+    display: none;
+}
+#billing_first_name_field {
+    width: 100%;
+}
+#billing_country_field{display: none;}
+/*.woocommerce-terms-and-conditions-wrapper{display: none;}*/

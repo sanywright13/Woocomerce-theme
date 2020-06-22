@@ -28,17 +28,16 @@
 
 
 if(is_front_page()){?>
-<!--
+
 <section class="mb-4">
           <div class="featured-image3 " style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/christin-hume-0MoF-Fe0w0A-unsplash-scaled.jpg);">
 <div class="overlay"></div>
 
-<div class=" container second-title text-center"><div class="col-12">Treat your skin by piling on the moisture—at every luxurious step.
+<div class=" container second-title text-center"><div class="col-lg-6">Treat your skin by piling on the moisture—at every luxurious step.
 
-Our Clean Promise: Over 1,500 questionable ingredients are never used in our formulations
-10% OFF ON YOUR FIRST ORDER
-Beauty & Cosmetic
-Hurry Up ! Get Exacting Discount Of All Cosmetic Item. </div>
+Pour survivre à leur environnement, les plantes ont développé
+ des propriétés parfois étonnantes, qui en font de véritables merveilles de technologie naturelles. 
+ 
 
 <div class="col-5" style="margin: auto;">
 <a class="btn btn-info" href="http://localhost/wordpresse2/wordpress/product/argan-huile/">Voirs Plus</a>
@@ -48,19 +47,27 @@ Hurry Up ! Get Exacting Discount Of All Cosmetic Item. </div>
               </div>
           
           </section>
--->
+
 		
 		  <section class="conta">
 			  <div class="container">
 				  <div class="row">
-					  <div class="col-12 animate__animated">
-		  <div class="text-center title">LE GRAND LIVRE DES INGRÉDIENTS</div>
-<div class="der">Pour survivre à leur environnement, les plantes ont développé des propriétés parfois étonnantes, qui en font de véritables merveilles de technologie naturelles. En incluant ces ingrédients dans ses cosmétiques, Biorosan capitalise sur les vertus et bienfaits de ces plantes. Dans son Grand Livre des Ingrédients, Biorosan vous partage sa passion pour une grande variété d’ingrédients verts issus d’un savoir-faire transmis de génération en génération.
-<div style="margin-top: 22px;"><img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Argan-Oil-Hair-Care-Treatment-Essence-Fast-Powerful-Hair-Growth-Liquid-Hair-Loss-Products-Serum-Repair-1.jpg" style="margin: auto;height: 500px;"></div>
+				  <div class="col-lg-6 col-md-12 col-sm-12 animate__animated mb-4">
+<div class="der">Pour survivre à leur environnement, les plantes ont développé
+ des propriétés parfois étonnantes, qui en font de véritables merveilles de technologie naturelles. 
+ En incluant ces ingrédients dans ses cosmétiques, Biorosan capitalise sur les vertus et bienfaits de ces plantes. 
+ Dans son Grand Livre des Ingrédients, Biorosan vous partage sa passion pour une grande variété d’ingrédients verts
+  issus d’un savoir-faire transmis de génération en génération.
+  </div>
+  </div>
+  <div class="col-lg-6 col-md-12 col-sm-12 mb-4 animate__animated" >
+<div style="margin-top: 22px;"><img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/HUILE-ARGAN.jpg" style="margin: auto;height: 389px;"></div>
 </div>
-</div>
-<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+<div class="text-center col-12 title">Produits Les Plus Vendus</div>
+<div class="col-lg-3 col-md-5 col-sm-12 mt-5 special-product">
+
 <div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<div class="short-images">
 <?php 
 $product=wc_get_product(103);
 $description=$product->get_description();
@@ -72,8 +79,10 @@ $image_prod=wp_get_attachment_image_src(151,'products_front_page')?>
 <?php echo $description; ?>
 </a>
 </div>
-<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12 mt-5 special-product">
 <div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<div class="short-images">
 <?php 
 $product=wc_get_product(117);
 $description=$product->get_description();
@@ -85,9 +94,11 @@ $image_prod=wp_get_attachment_image_src(150,'products_front_page')?>
 
 </a>
 </div>
-
-<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12 mt-5 special-product">
 <div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<div class="short-images">
+
 <?php 
 $product=wc_get_product(118);
 $description=$product->get_description();
@@ -99,8 +110,11 @@ $image_prod=wp_get_attachment_image_src(153,'products_front_page')?>
 
 </a>
 </div>
-<div class="col-lg-3 col-md-5 col-sm-12" style=" margin-top: 1em;">
+</div>
+<div class="col-lg-3 col-md-5 col-sm-12  mt-5 special-product">
 <div class="f-titre">Argan Oil is a rich source of Vitamin E</div>
+<div class="short-images">
+
 <?php 
 $product=wc_get_product(118);
 $description=$product->get_description();
@@ -113,11 +127,11 @@ $image_prod=wp_get_attachment_image_src(153,'products_front_page')?>
 </a>
 </div>
 </div>
+</div>
+</div>
 
 </div>
-<div class="d-flex  justify-content-center">Argan Oil Benefits: Top 12 Uses for Healthy Skin and Hair - Dr. Axe. What is argan oil? It's an all-natural alternative to chemical-laden beauty products .</div>
-
-
+</div>
 </section>
 <?php	  do_action( 'woocommerce_after_cart_table_change'); ?>
 

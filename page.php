@@ -34,10 +34,12 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php	 if(is_cart()) {do_action( 'woocommerce_after_cart_table_change');?>
+	<?php	 if(is_cart()) {
+	do_action('display_featured_products');
+		do_action( 'woocommerce_after_cart_table_change');?>
 	
-	<?php echo do_action('display_featured_products');
+	<?php 
 } ?>
 <?php
-do_action( 'storefront_sidebar' );
+//do_action( 'storefront_sidebar' );
 get_footer();
