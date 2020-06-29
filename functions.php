@@ -6,21 +6,19 @@ add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
   add_action( 'wp_enqueue_scripts', 'startwordpress_scripts' );
 
 function startwordpress_scripts() {
-    wp_enqueue_style('fontsawesome', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css');
-   
-       wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+  wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+  wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
+
+  wp_enqueue_style('owl-carousel2','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css');
+ wp_enqueue_style('fontsawesome', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css');
        wp_enqueue_style('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css');
-
        wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
-  
-      wp_enqueue_script( 'boot2','https://code.jquery.com/jquery-3.4.1.slim.min.js', array( 'jquery' ),'',true );
-      wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
+ 
 
-      wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
-   wp_enqueue_style( 'google_web_fonts1', 'https://fonts.googleapis.com/css2?family=Bitter:ital@1&display=swap' );
-   wp_enqueue_style( 'google_web_fonts2', 'https://fonts.googleapis.com/css2?family=Kanit' );
-   wp_enqueue_style( 'google_web_fonts3', 'https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap' );
-   wp_enqueue_style( 'google_web_fonts4', 'https://fonts.googleapis.com/css2?family=Amiri&display=swap' );
+   wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
+   wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
+
+   wp_enqueue_script('san','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/owl.carousel.js');
 
   }
   
@@ -86,107 +84,33 @@ if ( ! function_exists( 'website_header_cart' ) ) {
 		}
 	}
 }
-// Add Shortcode
-function custom_mini_cart() {
 
-	echo '<a href="#" class="dropdown-back" data-toggle="dropdown"> ';
-	    echo '<i class="fa fa-shopping-cart" aria-hidden="true"></i>';
-	    echo '<div class="basket-item-count" style="display: inline;">';
-	        echo '<span class="cart-items-count count">';
-	            echo WC()->cart->get_cart_contents_count();
-	        echo '</span>';
-	    echo '</div>';
-	echo '</a>';
-	echo '<ul class="dropdown-menu dropdown-menu-mini-cart">';
-	        echo '<li> <div class="widget_shopping_cart_content">';
-	                  woocommerce_mini_cart();
-	            echo '</div></li></ul>';
-
-}
-add_shortcode('custom-mini-cart','custom_mini_cart');
 //add menu 
 add_action('init','bio_add_header_menu');
 function bio_add_header_menu(){
   register_nav_menu('header_menu',__( 'Header menu' ));
 }
-function add_new_header_nav(){
 ?> 
 
-<div class="d-flex justify-content-between" style="background-color: #f9f9f9;">
-<div class="call">
-<i class="fas fa-phone-square-alt pr-2"></i>0650481844
-
-</div>
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" class="img-fluid" alt="" style="max-width: 120px;">
 
 
-<?php do_action('website_header');
-//echo do_shortcode('[custom-mini-cart]');
-?>
-
- </div>
-<div class="navbar navbar-expand-lg navbar-light bg-light" >
- 
- 
-
-
-
- <div class="row" style="width:100%">
-<!--
- <div class="  call col-lg-2 col-md-4 col-sm-4 ">
- <i class="fas fa-phone-square-alt pr-2"></i>0650481844
-</div>
-
-<div class="col-lg-2 offset-lg-3 col-md-4 col-sm-8">
-<img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/Untitled-1-1.jpg" class="img-fluid" alt="">
-</div>
-
-<div class="col-lg-3 offset-lg-12 col-md-4 ml-auto">
-<?php //do_action('website_header');
-echo do_shortcode('[custom-mini-cart]');
-?>
-
-</div>
--->
- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"><i class="fas fa-list-alt"></i></span>
-</button>
-
-    <?php
-    wp_nav_menu(
-      array(
-        'theme_location'  => 'header_menu',
-        'container' => 'div',
-        'container_class'=>'collapse navbar-collapse',
-        'container_id'      => 'navbarTogglerDemo01',
-        'menu_class'=>' navbar-nav mr-auto mt-2 mt-lg-0',
- )
-    );
-
-    ?>
-  </div>
-  
-  </div><!-- #site-navigation -->
-  <?php
-}
-
-
-add_action('storefront_header','add_new_header_nav',50);
-
+<?php
 //add search into nav list li 
+
 add_filter('wp_nav_menu_items','add_search_tags_nav_header',10,2);
 
 function add_search_tags_nav_header($items, $args){
  if($args->theme_location=="header_menu")
+
   $items .= '</ul><ul class="navbar-nav">
  
   <li id="menu-item-128" class="menu-item menu-item-type-post_type  menu-item-128">
 <form role="search" method="get" class="woocommerce-product-search form-inline my-2 my-lg-0" action="'.esc_url( home_url( '/' ) ).'">
 	<label class="screen-reader-text" for="woocommerce-product-search-field-">'.esc_html_e( '', 'woocommerce' ).'</label>
-	<input type="search" id="woocommerce-product-search-field-" class="search-field form-control mr-sm-2" placeholder="'.esc_attr__( 'Search products&hellip;', 'woocommerce' ).'" value="'.get_search_query().'" name="s" />
-	<button type="submit" class="btn btn-success my-2 my-sm-0" value="'.esc_attr_x( 'Search', 'submit button', 'woocommerce' ).'">'.esc_html_x( 'Search', 'submit button', 'woocommerce' ).'</button>
+	<input type="search" id="woocommerce-product-search-field-" class="search-field form-control mr-sm-2" placeholder="بحث عن منتوج" value="'.get_search_query().'" name="s" />
+	<button type="submit" class="btn btn-success my-2 my-sm-0" value="'.esc_attr_x( 'Search', 'submit button', 'woocommerce' ).'">ابحث</button>
 	<input type="hidden" name="post_type" value="product" />
-</form></li></ul>
+</form></li>
 ';  
  
 
@@ -222,11 +146,12 @@ if(! function_exists('remove_storefront_page_header')){
 
 //add a filter to hook the title of shop page and change iterator_apply
 function change_title_shop(){
- if(is_archive('shop')){?>
-		<h1 class="woocommerce-products-header__title page-title"><?php echo 'Nos Produits'; ?></h1>
+ if(is_archive('shop') && !is_search()){?>
+		<h1 class="mini-title"><span class="bc"><?php echo 'كل منتوجاتنا'; ?></span></h1>
 
 <?php
 }
+
 
 }
 add_filter('woocommerce_show_page_title','change_title_shop');
@@ -235,7 +160,7 @@ add_filter('loop_shop_per_page','new_loop_shop_per_page',20);
 if(!function_exists('new_loop')){
   function new_loop_shop_per_page($col){
 if(is_archive('product')){
-  $col=9;
+  $col=8;
   return $col;
 }
   }
@@ -265,7 +190,7 @@ add_filter('sanstore_product_category_title','change_title_category');
 
 function change_title_category(){
 $tr=get_queried_object()->name;?>
-<h1 class="woocommerce-products-header__title page-title"><?php echo $tr;?></h1>
+<h1 class="mini-title"><?php echo 'Produits '.$tr;?></h1>
 <?php
 }
 
@@ -277,7 +202,7 @@ function theme_description(){
     RARE ARGAN vous partage quelques rituels de beauté et vous accompagne dans vos petits moments de détente.</h1>";
   }
 }
-*/
+
 add_action('storefront_content_top','bio_theme_categories',10);
 
 function bio_theme_categories(){
@@ -286,7 +211,7 @@ if(is_front_page()){?>
 		  <div class="container mt-5" >
 <div class="row">
 <div class="col-lg-6">
-<a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
+<a href="http://localhost/wordpresse2/wordpress/product-category/bio/">
 <?php $image=wp_get_attachment_image_src(157, 'category_sizes');
 ?>
 
@@ -297,15 +222,15 @@ height: 326px;">
   Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
   </p>
 -->
-  <span class="save">Save 20%</span>
-<div class="sadiq">Voir Categorie</div>
+  <span class="save">تخفيطات %20</span>
+<div class="sadiq">انظر الان</div>
 </a>
 </div>
 
 <div class="col-lg-6">
   <?php $image=wp_get_attachment_image_src(158, 'category_sizes');?>
 
-<a href="http://localhost/wordpresse2/wordpress/product-category/beaute/">
+<a href="http://localhost/wordpresse2/wordpress/product-category/bio/">
 <img src="<?php echo $image[0];?>" alt="" width="<?php echo $image[1];?>" height="<?php echo $image[2];?>" style="width: 509px;
 height: 326px;">
 <!--
@@ -313,8 +238,8 @@ height: 326px;">
 Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaulmoogra seed oil, then it’s time t
 </p>
 -->
-<span class="save">Save 20%</span>
-<div class="sadiq">Voir Categorie</div>
+<span class="save">تخفيطات %20</span>
+<div class="sadiq">انظر الان</div>
 
 
 </a>
@@ -325,7 +250,7 @@ Chaulmoogra Seed Oil And its Many Skin Benefits If you’ve never heard of chaul
 <?php }
 
 }
-
+*/
 // To change add to cart text on product archives(Collection) page
 add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );  
 function woocommerce_custom_product_add_to_cart_text() {
@@ -357,18 +282,19 @@ $loop=new WP_Query($args);
 if($loop->have_posts()):
   ?>
   <section class="produits container ">
-<h2 class="text-center mini-title m-4">Nouveaux Produits
+<h2 class="text-center mini-title m-4"><span class="bc">المنتوجات الجديدة
+</span>
 </h2>
 <div class="row mt-5">
               <?php
               while($loop->have_posts()):
                   $loop->the_post();?>
-                   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                   <div class="col-6 col-sm-6 col-md-4 col-lg-3  mb-3">
                    <?php
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $loop->post->ID ),"products_front_page");
                   ?>
                  <div class="product-item">
-                                    <span class="new-box"><span class="new-label">Neuf</span></span>
+                                   <!-- <span class="new-box"><span class="new-label">Neuf</span></span>-->
                                     <div class="produit-details">
               <?php  echo '<a href="'.get_permalink( $loop->post->ID).'">
               <img src="'.$image[0].'" class="hvr-bounce-out">
@@ -397,7 +323,7 @@ endif;
 }
 add_action('woocommerce_before_add_to_cart_quantity','quantity_title');
 function quantity_title(){
-  echo '<div class=" qte">Quantite</div>';
+  echo '<div class=" qte">الكمية</div>';
 }
 // Remove the product description Title
 add_filter('woocommerce_product_tabs','remove_description_tabs');
@@ -456,13 +382,7 @@ function remove_storefront_before_content(){
  remove_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
 
 }
-add_action( 'woocommerce_before_main_content', 'change_bio_before_content');
 
-function change_bio_before_content(){?>
-  <div id="primary" class="container">
-			<main id="main" class="site-main" role="main">
-		<?php
-}
  add_action( 'woocommerce_after_cart_table_change','after_bio_cart_items' ); 
  if(!function_exists ('after_bio_cart_items')){
    function after_bio_cart_items(){?>
@@ -471,21 +391,21 @@ function change_bio_before_content(){?>
 <div class=" d-flex  justify-content-around">
   <div class="p-2  bd-highlight"><div class="ban">
 <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/57376501-bio-icon.jpg" style="width: 132px;">
-<div>All Our products Re 100% pure</div>
+<div>كل منتجاتنا طبيعية 100%</div>
 </div></div>
   <div class="p-2  bd-highlight"><div class="ban">
   <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
-<div>All Our products Re 100% pure</div>
+<div>خدمة الزبناء عبر الهاتف </div>
 </div></div>
   <div class="p-2  bd-highlight">
     <div class="ban">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
-<div>All Our products Re 100% pure</div>
+<div>التوصيل مجاني و سريع</div>
 </div></div>
 <div class="p-2  bd-highlight">
     <div class="ban">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
-<div>All Our products Re 100% pure</div>
+<div>اثمنة في المتناول</div>
 </div></div>
 </div>
 
@@ -542,13 +462,13 @@ add_action( 'woocommerce_after_checkout_form', 'woocommerce_checkout_coupon_form
 add_action( 'woocommerce_checkout_billing', 'bbloomer_checkout_step2' );
  
 function bbloomer_checkout_step2() {
-   echo '<p class="steps">STEP1</p>';
+   echo '<p class="steps">الخطوة 1</p>';
 }
  
 add_action( 'woocommerce_checkout_before_order_review_heading', 'bbloomer_checkout_step3' );
  
 function bbloomer_checkout_step3() {
-   echo '<p class="steps">STEP2</p>';
+   echo '<p class="steps">الخطوة 2</p>';
 }
 
 function wc_remove_checkout_fields( $fields ) {
@@ -567,8 +487,9 @@ add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
 
 add_filter('woocommerce_checkout_fields','custom_override_checkout_fields');
 function custom_override_checkout_fields($fields){
-  $fields['billing']['billing_address_1']['label']='Adresse';
-  $fields['billing']['billing_first_name']['label']='Nom Et Prénom';
+  $fields['billing']['billing_first_name']['label']='الاسم';
+  $fields['billing']['billing_city']['label']='المدينة';
+  $fields['billing']['billing_phone']['label']='رقم الهاتف';
   return $fields;
 }
 add_filter('woocommerce_default_address_fields','edit_required_field_email');
@@ -580,11 +501,17 @@ function edit_required_field_email($address_field){
 add_action( 'storefront_page', 'storefront_page_header', 10 );
 function storefront_page_header(){
   if(is_checkout()){
-    the_title('<div class="title-checkout">','</div>');  }
+    if(!is_wc_endpoint_url( 'order-received' ) ){
+echo'<div class="title-checkout">المرجو ادخال معلوماتك </div>';  }
+    }
     else {
       if(is_cart()){
-        the_title('<div class="title-checkout">','</div>');  
-
+       echo '<div class="title-checkout mt-5">سلة مشترياتكم</div>';  
+       echo '<span class="cart_mes">'; if(!WC()->cart->is_empty()){
+		
+        echo 'ملحوظة : التوصيل مجاني لجميع مدن المغرب' ;
+       }
+       echo '</span>';
       }
     }
 }
@@ -608,7 +535,7 @@ if(!function_exists('edit_featured_products')){
     );
     $featured_query=New WP_Query($args);
     if($featured_query->have_posts()){?>
-    <div class="featured-products text-center">Produits Similaires</div>
+    <div class="featured-products text-center">منتجات مشابهة</div>
     <div class="row justify-content-center mt-5 p-2">
     
     <?php
@@ -679,5 +606,274 @@ if ( ! function_exists( 'edit_shop_title_product' ) ) {
 	function edit_shop_title_product() {
 		echo '<div class="titre-produit"><h2 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2></div>';
 	}
+}
+add_filter('woocommerce_product_add_to_cart_text','changer_add_to_cart_text_loop');
+function changer_add_to_cart_text_loop(){
+  $button_text='أضف إلى السلة';
+  return $button_text;
+}
+
+add_filter( 'woocommerce_get_script_data', 'change_js_view_cart_button', 10, 2 ); 
+function change_js_view_cart_button( $params, $handle )  {
+    if( 'wc-add-to-cart' !== $handle ) return $params;
+
+    $params['i18n_view_cart'] = esc_attr__( 'ادهب الى السلة', "woocommerce"); // Text
+
+    return $params;
+}
+//change subtotal name to arabic
+add_action( 'woocommerce_widget_shopping_cart_total', 'remove_change_woocommerce_widget_shopping_cart_subtotal',9 );
+function remove_change_woocommerce_widget_shopping_cart_subtotal(){
+  remove_action( 'woocommerce_widget_shopping_cart_total', 'woocommerce_widget_shopping_cart_subtotal', 10 );
+
+}
+
+add_action( 'woocommerce_widget_shopping_cart_total', 'change_woocommerce_widget_shopping_cart_subtotal', 10 );
+
+if ( ! function_exists( 'change_woocommerce_widget_shopping_cart_subtotal' ) ) {
+
+function change_woocommerce_widget_shopping_cart_subtotal() {
+		echo '<strong> المجموع :</strong> ' . WC()->cart->get_cart_subtotal();
+	}
+}
+ // change viw cart in mini cart 
+
+add_action( 'woocommerce_widget_shopping_cart_buttons', 'remove_woocommerce_widget_shopping_cart_button_view_cart',9);
+function remove_woocommerce_widget_shopping_cart_button_view_cart(){
+  remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10 );
+
+}
+add_action( 'woocommerce_widget_shopping_cart_buttons', 'change_woocommerce_widget_shopping_cart_button_view_cart', 10 );
+
+ if ( ! function_exists( 'change_woocommerce_widget_shopping_cart_button_view_cart' ) ) {
+
+	function change_woocommerce_widget_shopping_cart_button_view_cart() {
+		echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="button wc-forward">ادهب الى السلة </a>';
+	}
+}
+add_action( 'woocommerce_widget_shopping_cart_buttons', 'remove_woocommerce_widget_shopping_cart_proceed_to_checkout', 11 );
+function remove_woocommerce_widget_shopping_cart_proceed_to_checkout(){
+remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_proceed_to_checkout', 20 );
+
+}
+add_action( 'woocommerce_widget_shopping_cart_buttons', 'edit_widget_shopping_cart_proceed_to_checkout', 20 );
+
+if ( ! function_exists( 'edit_widget_shopping_cart_proceed_to_checkout' ) ) {
+
+
+	function edit_widget_shopping_cart_proceed_to_checkout() {
+		echo '<a href="' . esc_url( wc_get_checkout_url() ) . '" class="button checkout wc-forward"> تأكيد الطلب </a>';
+	}
+}
+add_filter('woocommerce_order_button_text','order_button_text');
+function order_button_text($order_button_text){
+  $order_button_text="اطلب الان";
+ return $order_button_text;
+}
+
+
+ add_filter('woocommerce_thankyou_order_received_text','change_text_thankyou',10,2);
+ function change_text_thankyou($text,$order){
+   $text="شكرا لك. تم استلام طلبك";
+return $text;
+ }
+
+add_action('woocommerce_before_main_content', 'remove_product_storefront_before_content', 9 );
+function remove_product_storefront_before_content(){
+  if(is_product()){
+remove_action('woocommerce_before_main_content', 'storefront_before_content', 10 );
+  }
+}
+add_action('woocommerce_before_main_content','add_new_before_site');
+function add_new_before_site(){
+  if(is_product()){
+  
+  ?>
+  <div id="primary" class="container">
+			<main id="main" class="site-main" role="main">
+<?php } 
+}
+
+add_filter('woocommerce_product_single_add_to_cart_text','change_text_single_product',10);
+function change_text_single_product($text){
+$text="اشتري الان";
+return $text;
+}
+add_filter('woocommerce_reviews_title','change_text_review',10,3);
+function change_text_review($reviews_title, $count, $product){
+  $reviews_title="أراء الزبناء";
+echo '<h2 class="text-center mb-5 "><span class="bc">'.$reviews_title.'</span></h2>';
+}
+
+
+add_filter( 'woocommerce_product_review_comment_form_args', 'filter_function_name_5512' );
+function filter_function_name_5512( $comment_form ){
+
+//var_dump($comment_form);
+unset( $comment_form['fields']['email']);
+
+unset($comment_form['fields']['must_log_in']);
+$comment_form['label_submit']="إرسال";
+$comment_form['fields']['author']='
+<p class="comment-form-author"><label for="author">الاسم<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required /></p>';
+$comment_form['fields']['cookies']='<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">احفظ اسمي والبريد الإلكتروني في المتصفح لتعليقي التالي</label></p>';
+  
+return $comment_form;
+}
+
+add_action( 'woocommerce_before_single_product', 'remove_woocommerce_output_all_notices');
+function remove_woocommerce_output_all_notices(){
+  add_action( 'woocommerce_before_single_product', 'woocommerce_output_all_notices', 10 );
+
+}
+add_action( 'woocommerce_before_single_product', 'add_woocommerce_output_all_notices',10 );
+function add_woocommerce_output_all_notices(){
+  
+  $all_notices  = WC()->session->get( 'wc_notices', array() );
+  $notice_types = apply_filters( 'woocommerce_notice_types', array( 'error', 'success', 'notice' ) );
+  
+    // Buffer output.
+    ob_start();
+  if($notice_types=="success"){
+    $notice='hdfd';
+
+  }
+  wc_clear_notices();
+
+  $notices = wc_kses_notice( ob_get_clean() );
+
+  
+  echo $notices; // WPCS: XSS ok.
+}
+add_action( 'woocommerce_cart_is_empty', 'remove_wc_empty_cart_message', 9);
+function remove_wc_empty_cart_message(){
+remove_action( 'woocommerce_cart_is_empty', 'wc_empty_cart_message',10);
+
+}
+add_action( 'woocommerce_cart_is_empty', 'edit_wc_empty_cart_message', 10);
+
+function edit_wc_empty_cart_message() {
+	echo '<div class="cart-empty woocommerce-info">' . wp_kses_post( apply_filters( 'wc_empty_cart_message', __( 'سلة المشتريات فارغة حاليا', 'woocommerce' ) ) ) . '</div>';
+}
+add_action( 'woocommerce_before_main_content', 'remove_shop_storefront_before_content', 9);
+function remove_shop_storefront_before_content(){
+  if(is_tax('shop')){
+remove_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
+  }
+}
+add_action( 'woocommerce_before_main_content', 'edit_shop_storefront_before_content',10);
+
+function edit_shop_storefront_before_content() {
+  if(is_tax('shop')){
+		?>
+		<div id="primary" class="container">
+			<main id="main" class="site-main" role="main">
+		<?php
+	}
+}
+
+
+
+// Append cart item (and cart count) to end of main menu.
+
+add_shortcode('woo_mini_cart','woo_mini_cart');
+function woo_mini_cart(){
+  ob_start();
+  $cart_url = wc_get_cart_url();?>
+  <div class="mini-cart">
+  <a href="<?php echo $cart_url; ?>">
+
+    <span> Cart </span> 
+    <span> <?php $cart_count = WC()->cart->cart_contents_count;
+    echo  $cart_count; ?>
+    <i class="fas fa-shopping-cart"></i>
+    </span>
+    </a>
+</div>
+  <?php
+      return ob_get_clean();
+}
+
+add_filter( 'woocommerce_add_to_cart_fragments', 'iconic_cart_count_fragments', 10, 1 );
+
+function iconic_cart_count_fragments( $fragments ) {
+  ob_start();
+  $cart_url = wc_get_cart_url();?>
+  <div class="mini-cart">
+    <a href="<?php echo $cart_url; ?>">
+    <span> السلة</span> <span> <?php $cart_count = WC()->cart->cart_contents_count;
+    echo  $cart_count; ?><i class="fas fa-shopping-cart"></i></span>
+    </a>
+</div>
+<?php 
+$fragments['div.mini-cart'] = ob_get_clean();
+
+return $fragments;
+}
+
+
+
+add_filter( 'wp_nav_menu_items', 'woo_cart_but_icon', 12, 2 ); // Change menu to suit - example uses 'top-menu'
+
+
+function woo_cart_but_icon ( $items, $args ) {
+       $items .= do_shortcode('[woo_mini_cart]') ; 
+       
+       return $items;
+} 
+add_filter('woocommerce_catalog_orderby','translate_order_by',10);
+function translate_order_by($array){
+$array=array(
+  'menu_order' =>  'ترتيب عشوائي',
+'popularity' => __( 'الاكثر مبيعا', 'woocommerce' ),
+'rating'     => __( 'الاحسن تقييم', 'woocommerce' ),
+'date'       => __( 'ترتيب من الجديد الى القديم', 'woocommerce' ),
+'price-desc'      => __( 'من اعلى ثمن الى ارخص ثمن', 'woocommerce' ),
+' price' => __( 'من ارخص الى اغلى ثمن', 'woocommerce' ),
+);
+return $array;
+}
+add_action( 'storefront_before_content', 'remove_woocommerce_breadcrumb', 9 );
+function remove_woocommerce_breadcrumb(){
+ 
+remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
+}
+
+add_action( 'storefront_before_content', 'add_single_product_breadcrumb', 10);
+function add_single_product_breadcrumb(){
+  global $post;
+  $id = $post->ID;
+  if(is_product()){
+  $home="http://localhost/wordpresse2/wordpress/";
+  echo '<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a href="'. $home.'">الرئيسية</a></li>
+    <li class="breadcrumb-item active" aria-current="page">'.get_the_title($id).'</li>
+
+  </ol>
+</nav>';
+
+}
+}
+
+add_action( 'woocommerce_archive_description', 'edit_woocommerce_breadcrumb', 10 );
+function edit_woocommerce_breadcrumb(){
+  
+if(is_search()){
+  global $post;
+  $id = $post->ID;
+  
+  $home="http://localhost/wordpresse2/wordpress/";
+  $shop_page="http://localhost/wordpresse2/wordpress/shop/";
+  echo '<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><a href="'. $home.'">الرئيسية</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="'.$shop_page.'">كل المنتجات</a></li>
+    <li class="breadcrumb-item active" aria-current="page">لقد قمت بالبحت عن '.get_search_query().'</li>
+
+
+  </ol>
+</nav>';
+}
 }
 ?>

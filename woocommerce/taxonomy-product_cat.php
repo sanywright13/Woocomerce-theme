@@ -40,13 +40,13 @@ get_header( 'shop' );
 <div class="container">
 <div class="row">
 <div class="col-lg-2">
-<div class="filter">Filter by :</div>
+<div class="filter">Choisir par ordre:</div>
 	<div class="row">
   <div class="col-12">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-      <a class="nav-link " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" name="price">price</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" name="popularity">popularity</a>
+      <a class="nav-link " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" name="price">prix</a>
+      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" name="popularity">popularité</a>
     </div>
   </div>
   

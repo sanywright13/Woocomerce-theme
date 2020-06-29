@@ -22,11 +22,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! $notices ) {
 	return;
 }
-
+$all_notices  = WC()->session->get( 'wc_notices', array() );
+//var_dump($all_notices);
+//var_dump($all_notices['success'][0]['notice']);
+$all_notices['success'][0]['notice']="";
 ?>
 
 <?php foreach ( $notices as $notice ) : ?>
 	<div class="woocommerce-message"<?php echo wc_get_notice_data_attr( $notice ); ?> role="alert">
-		<?php echo wc_kses_notice( $notice['notice'] ); ?>
+
+		<?php 
+		if(is_product())
+
+		echo '
+		<div class="d-flex bd-highlight">
+		<div class="flex-grow-1">
+		<span> تمت إضافة المنتج إلى سلة التسوق الخاصة بك </span> 
+		</div>
+		<div>
+		<a href="'.wc_get_cart_url().'"> ادهب الى السلة<a/>
+		</div>
+		</div>'; 
+		else {
+if(is_cart())
+			echo 'تم مسح هدا المنتج من السلة';
+		}?>
 	</div>
 <?php endforeach; ?>

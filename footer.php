@@ -11,8 +11,7 @@
 
 		</div><!-- .col-full -->
 	</div><!-- #content -->
-	</div><!-- #page -->
-</div>
+	
 
 	<?php do_action( 'storefront_before_footer' ); ?>
 
@@ -78,10 +77,7 @@
 	?>
 
 	<script>
-/*
-    Carousel
-*/
-  
+
 jQuery(document).ready(function($){
 
   function  check_if_in_view (){
@@ -99,10 +95,7 @@ $(this).addClass('animate__fadeInLeft')
 	if($(this)[0]==$('.zone')[0]){
 		$(this).addClass('animate__slideInUp')
 	}
-if($(this)[0]==$('.conta .animate__animated')[0]){
 
-$(this).addClass('animate__slideInLeft')
-}
 
 }
 
@@ -112,7 +105,7 @@ $(this).addClass('animate__slideInLeft')
 	$(window).on('scroll resize', check_if_in_view);
 	function animate_front_page_image(){
 			
-		$('.conta .col-4 .animate__animated').each(function(){
+		$('.top-produits .special-product').each(function(){
 			element_high=$(this).offset().top+$(this).outerHeight();
 
 	window_scroll=$(window).scrollTop()+$(window).height();
@@ -120,9 +113,8 @@ $(this).addClass('animate__slideInLeft')
 			element_high=$(this).offset().top+$(this).outerHeight();
 
 	window_scroll=$(window).scrollTop()+$(window).height();
-	
 	if($(this).offset().top<=window_scroll && element_high>=$(window).scrollTop()){
-			$(this).addClass('animate__fadeInLeft')	;
+			$(this).addClass('animate__animated animate__fadeInUpBig')	;
 			}
 		})
 	}
@@ -137,7 +129,33 @@ $(window).on('scroll resize',animate_front_page_image);
   });
  
 
+   
+  $("#owl-demo").owlCarousel({
+		loop:true,
+		 nav : true, // Show next and prev buttons
+		 pagination:true,
+		 autoplay: true,
+		 slideSpeed : .100,
+		 paginationSpeed : 400,
+		 lazyLoad:true,
+		 items : 1, 
+		 itemsDesktop : false,
+      itemsDesktopSmall : false,
+      itemsTablet: false,
+      itemsMobile : false,
+	  dots:true,
+	  transitionStyle : "fade",
+	  animateOut: 'animate__fadeOut',
+    animateIn: 'animate__fadeIn',
+	
+	 });
+
 });
+
+
+  
+	
+
 </script>
 
 

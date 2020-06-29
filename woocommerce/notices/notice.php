@@ -27,6 +27,10 @@ if ( ! $notices ) {
 
 <?php foreach ( $notices as $notice ) : ?>
 	<div class="woocommerce-info"<?php echo wc_get_notice_data_attr( $notice ); ?>>
-		<?php echo wc_kses_notice( $notice['notice'] ); ?>
+		<?php 
+		if(is_search())
+		echo 'لا يوجد منتج مطابق لاختيارك';
+else:
+		echo wc_kses_notice( $notice['notice'] ); ?>
 	</div>
 <?php endforeach; ?>

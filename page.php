@@ -11,7 +11,7 @@
  */
 
 get_header(); ?>
-	<div id="primary" class="<?php if(is_cart() || is_checkout()){?>container<?php }?>">
+	<div id="primary" class="<?php if(is_cart() || is_checkout() || is_product() || is_tax('shop')){?>container mt-5<?php }?>">
 		<main id="main" class="site-main " role="main">
 
 			<?php
