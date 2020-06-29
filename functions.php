@@ -19,6 +19,7 @@ function startwordpress_scripts() {
    wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
 
    wp_enqueue_script('san','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/owl.carousel.js');
+   wp_enqueue_script('wow','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/WOW-master/dist/wow.min.js');
 
   }
   
@@ -28,61 +29,35 @@ add_image_size('category_sizes',500,283,true);
 add_action( 'woocommerce_after_shop_loop_item', 'remove_woocommerce_template_loop_product_link_close',2);
 function remove_woocommerce_template_loop_product_link_close(){
   if(is_front_page()){
+    if(!is_admin())
   remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
   }
 }
 add_action('storefront_header','remove_brand');
 function remove_brand(){
+  if(!is_admin())
   remove_action('storefront_header', 'storefront_site_branding',20);
 
 }
 
 add_action('storefront_header','remove_cost');
 function remove_cost(){
+  if(!is_admin())
   remove_action( 'storefront_header', 'storefront_primary_navigation_wrapper', 42 );
 
 }
 add_action('storefront_header','remove_prev_navigation');
 function remove_prev_navigation(){
+  if(!is_admin())
   remove_action( 'storefront_header', 'storefront_primary_navigation', 50 );
 }
 
 add_action( 'storefront_header', 'remove_storefront_header_cart');
 
 function remove_storefront_header_cart(){
+  if(!is_admin())
  remove_action( 'storefront_header', 'storefront_header_cart', 60 );
 
-}
-add_action( 'website_header', 'website_header_cart',10);
-if ( ! function_exists( 'website_header_cart' ) ) {
-	/**
-	 * Display Header Cart
-	 *
-	 * @since  1.0.0
-	 * @uses  storefront_is_woocommerce_activated() check if WooCommerce is activated
-	 * @return void
-	 */
-	function website_header_cart() {
-		if ( storefront_is_woocommerce_activated() ) {
-			if ( is_cart() ) {
-				$class = 'current-menu-item';
-			} else {
-				$class = '';
-			}
-      ?>
-      <div class="pr-5" style="width:323px;">
-		<ul id="site-header-cart " class="site-header-cart menu">
-			<li class="<?php echo esc_attr( $class ); ?>">
-				<?php storefront_cart_link(); ?>
-			</li>
-			<li>
-				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
-			</li>
-    </ul>
-    </div>
-			<?php
-		}
-	}
 }
 
 //add menu 
@@ -92,14 +67,13 @@ function bio_add_header_menu(){
 }
 ?> 
 
-
-
 <?php
 //add search into nav list li 
 
 add_filter('wp_nav_menu_items','add_search_tags_nav_header',10,2);
 
 function add_search_tags_nav_header($items, $args){
+  if(!is_admin())
  if($args->theme_location=="header_menu")
 
   $items .= '</ul><ul class="navbar-nav">
@@ -120,12 +94,14 @@ return $items;
 
 add_action( 'storefront_header', 'remove_storefront_primary_navigation_wrapper_close');
 function remove_storefront_primary_navigation_wrapper_close(){
+  if(!is_admin())
  remove_action( 'storefront_header', 'storefront_primary_navigation_wrapper_close',68);
 
 }
 add_action( 'storefront_header', 'remove_storefront_product_search' );
 
 function remove_storefront_product_search(){
+  if(!is_admin())
 remove_action( 'storefront_header', 'storefront_product_search', 40 );
 
 }
@@ -133,12 +109,14 @@ remove_action( 'storefront_header', 'storefront_product_search', 40 );
 add_action( 'storefront_homepage', 'remove_storefront_homepage_header',9);
 if(! function_exists('remove_storefront_homepage_header')){
   function remove_storefront_homepage_header(){
+    if(!is_admin())
     remove_action( 'storefront_homepage', 'storefront_homepage_header', 10 );
   }
 }
 add_action( 'storefront_page', 'remove_storefront_page_header');
 if(! function_exists('remove_storefront_page_header')){
   function remove_storefront_page_header(){
+    if(!is_admin())
     remove_action( 'storefront_page', 'storefront_page_header', 10 );
   }
 }
@@ -183,7 +161,7 @@ if(!function_exists('numbers_products_per_row')){
 add_action( 'wp', 'remove_title_from_home_default_template' );
  
 function remove_title_from_home_default_template() {
-   if ( is_front_page() ) remove_action( 'storefront_page', 'storefront_page_header', 10 );
+   if ( is_front_page() && !is_admin()) remove_action( 'storefront_page', 'storefront_page_header', 10 );
 }
 
 add_filter('sanstore_product_category_title','change_title_category');
@@ -379,6 +357,7 @@ add_filter( 'woocommerce_cart_needs_payment', '__return_false' );
 add_action( 'woocommerce_before_main_content', 'remove_storefront_before_content');
 
 function remove_storefront_before_content(){
+  if(!is_admin())
  remove_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
 
 }
@@ -416,7 +395,7 @@ function remove_storefront_before_content(){
  }
  add_action( 'storefront_page', 'remove_storefront_page_header',10);
  function remove_storefront_page_header(){
- 
+ if(!is_admin())
   remove_action( 'storefront_page', 'storefront_page_header', 10 );
    
 }
@@ -446,7 +425,7 @@ return $args;
 //remove header ,sidebarmfooter in checkout page
 add_action ('wp','remove_header_footer_checkout_page');
 function remove_header_footer_checkout_page(){
-  if(is_checkout()){
+  if(is_checkout() && !is_admin()){
   remove_all_actions( 'storefront_header' );
   remove_action( 'storefront_sidebar', 'storefront_get_sidebar', 10 );
   remove_action( 'storefront_footer', 'storefront_footer_widgets', 10 );
@@ -473,6 +452,7 @@ function bbloomer_checkout_step3() {
 
 function wc_remove_checkout_fields( $fields ) {
   // Billing fields
+  if(!is_admin()){
   unset($fields['billing']['billing_last_name']);
   unset($fields['billing']['billing_postcode']);
   unset($fields['billing']['billing_state']);
@@ -480,22 +460,26 @@ function wc_remove_checkout_fields( $fields ) {
   unset( $fields['billing']['billing_address_2'] );
   unset( $fields['billing']['billing_address_1'] );
   unset( $fields['billing']['billing_email'] );
-
+  }
   return $fields;
 }
 add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
 
 add_filter('woocommerce_checkout_fields','custom_override_checkout_fields');
 function custom_override_checkout_fields($fields){
+  if(!is_admin()){
   $fields['billing']['billing_first_name']['label']='الاسم';
   $fields['billing']['billing_city']['label']='المدينة';
   $fields['billing']['billing_phone']['label']='رقم الهاتف';
   return $fields;
+  }
 }
 add_filter('woocommerce_default_address_fields','edit_required_field_email');
 function edit_required_field_email($address_field){
+  if(!is_admin()){
   $address_field['address_1']['required'] = false;
   return $address_field;
+  }
 }
 
 add_action( 'storefront_page', 'storefront_page_header', 10 );
@@ -506,13 +490,15 @@ echo'<div class="title-checkout">المرجو ادخال معلوماتك </div>
     }
     else {
       if(is_cart()){
+        if(!WC()->cart->is_empty()){
        echo '<div class="title-checkout mt-5">سلة مشترياتكم</div>';  
-       echo '<span class="cart_mes">'; if(!WC()->cart->is_empty()){
+       echo '<span class="cart_mes">'; 
 		
         echo 'ملحوظة : التوصيل مجاني لجميع مدن المغرب' ;
-       }
+       
        echo '</span>';
       }
+    }
     }
 }
 add_action('display_featured_products','edit_featured_products',10);
@@ -566,7 +552,7 @@ $product_img=woocommerce_get_product_thumbnail('woocommerce_thumbnail');?>
 
 add_action( 'woocommerce_before_shop_loop_item_title', 'remove_woocommerce_template_loop_product_thumbnail', 2);
 function remove_woocommerce_template_loop_product_thumbnail(){
-  if(is_archive())
+  if(is_archive() && !is_admin())
   remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
 
 }
@@ -586,14 +572,21 @@ height: 326px;">
 }
 add_action('woocommerce_after_single_product_summary','remove_storefront_woocommerce_pagination',22);
 function remove_storefront_woocommerce_pagination(){
+  if(!is_admin())
+
 remove_action( 'woocommerce_after_single_product_summary', 'storefront_single_product_pagination', 30 );
 }
 add_action( 'wp', function() {
+  if(!is_admin())
+{
   remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20 );
   remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
+}
 } );
 add_action( 'woocommerce_shop_loop_item_title', 'remove_woocommerce_template_loop_product_title', 9 );
 function remove_woocommerce_template_loop_product_title(){
+  if(!is_admin())
+
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
 }
 
@@ -624,6 +617,8 @@ function change_js_view_cart_button( $params, $handle )  {
 //change subtotal name to arabic
 add_action( 'woocommerce_widget_shopping_cart_total', 'remove_change_woocommerce_widget_shopping_cart_subtotal',9 );
 function remove_change_woocommerce_widget_shopping_cart_subtotal(){
+  if(!is_admin())
+
   remove_action( 'woocommerce_widget_shopping_cart_total', 'woocommerce_widget_shopping_cart_subtotal', 10 );
 
 }
@@ -640,6 +635,8 @@ function change_woocommerce_widget_shopping_cart_subtotal() {
 
 add_action( 'woocommerce_widget_shopping_cart_buttons', 'remove_woocommerce_widget_shopping_cart_button_view_cart',9);
 function remove_woocommerce_widget_shopping_cart_button_view_cart(){
+  if(!is_admin())
+
   remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10 );
 
 }
@@ -653,6 +650,8 @@ add_action( 'woocommerce_widget_shopping_cart_buttons', 'change_woocommerce_widg
 }
 add_action( 'woocommerce_widget_shopping_cart_buttons', 'remove_woocommerce_widget_shopping_cart_proceed_to_checkout', 11 );
 function remove_woocommerce_widget_shopping_cart_proceed_to_checkout(){
+  if(!is_admin())
+
 remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_proceed_to_checkout', 20 );
 
 }
@@ -681,6 +680,8 @@ return $text;
 add_action('woocommerce_before_main_content', 'remove_product_storefront_before_content', 9 );
 function remove_product_storefront_before_content(){
   if(is_product()){
+    if(!is_admin())
+
 remove_action('woocommerce_before_main_content', 'storefront_before_content', 10 );
   }
 }
@@ -723,30 +724,15 @@ return $comment_form;
 
 add_action( 'woocommerce_before_single_product', 'remove_woocommerce_output_all_notices');
 function remove_woocommerce_output_all_notices(){
-  add_action( 'woocommerce_before_single_product', 'woocommerce_output_all_notices', 10 );
+  if(!is_admin())
+  remove_action( 'woocommerce_before_single_product', 'woocommerce_output_all_notices', 10 );
 
 }
-add_action( 'woocommerce_before_single_product', 'add_woocommerce_output_all_notices',10 );
-function add_woocommerce_output_all_notices(){
-  
-  $all_notices  = WC()->session->get( 'wc_notices', array() );
-  $notice_types = apply_filters( 'woocommerce_notice_types', array( 'error', 'success', 'notice' ) );
-  
-    // Buffer output.
-    ob_start();
-  if($notice_types=="success"){
-    $notice='hdfd';
 
-  }
-  wc_clear_notices();
-
-  $notices = wc_kses_notice( ob_get_clean() );
-
-  
-  echo $notices; // WPCS: XSS ok.
-}
 add_action( 'woocommerce_cart_is_empty', 'remove_wc_empty_cart_message', 9);
 function remove_wc_empty_cart_message(){
+  if(!is_admin())
+
 remove_action( 'woocommerce_cart_is_empty', 'wc_empty_cart_message',10);
 
 }
@@ -758,6 +744,7 @@ function edit_wc_empty_cart_message() {
 add_action( 'woocommerce_before_main_content', 'remove_shop_storefront_before_content', 9);
 function remove_shop_storefront_before_content(){
   if(is_tax('shop')){
+    if(!is_admin())
 remove_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
   }
 }
@@ -783,7 +770,7 @@ function woo_mini_cart(){
   <div class="mini-cart">
   <a href="<?php echo $cart_url; ?>">
 
-    <span> Cart </span> 
+    <span> السلة </span> 
     <span> <?php $cart_count = WC()->cart->cart_contents_count;
     echo  $cart_count; ?>
     <i class="fas fa-shopping-cart"></i>
@@ -841,9 +828,10 @@ remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
 
 add_action( 'storefront_before_content', 'add_single_product_breadcrumb', 10);
 function add_single_product_breadcrumb(){
-  global $post;
-  $id = $post->ID;
+  
   if(is_product()){
+    global $post;
+  $id = $post->ID;
   $home="http://localhost/wordpresse2/wordpress/";
   echo '<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -860,9 +848,7 @@ add_action( 'woocommerce_archive_description', 'edit_woocommerce_breadcrumb', 10
 function edit_woocommerce_breadcrumb(){
   
 if(is_search()){
-  global $post;
-  $id = $post->ID;
-  
+ if ( have_posts() ) {
   $home="http://localhost/wordpresse2/wordpress/";
   $shop_page="http://localhost/wordpresse2/wordpress/shop/";
   echo '<nav aria-label="breadcrumb">
@@ -874,6 +860,11 @@ if(is_search()){
 
   </ol>
 </nav>';
+}
+ else {
+  echo ' " '.get_search_query().' "  لا يوجد منتج مطابق لاختيارك';
+
+ }
 }
 }
 ?>

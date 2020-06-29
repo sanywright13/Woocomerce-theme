@@ -35,20 +35,20 @@ if(is_front_page()){?>
 
 <section class="mb-4">
           <div class="featured-image3 " style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/christin-hume-0MoF-Fe0w0A-unsplash-scaled.jpg);">
-<div class="overlay"></div>
+		  <div class=" container ">
+<div class="row second-title">
+		  <div class="overlay"></div>
 
-<div class=" container second-title text-center">
-	<div class="col-lg-6">
-	Treat your skin by piling on the moisture—at every luxurious step.
-
-Pour survivre à leur environnement, les plantes ont développé
- des propriétés parfois étonnantes, qui en font de véritables merveilles de technologie naturelles. 
+	<div class="col-lg-6 wow bounceInUp">
+<p>	نختار منتجاتنا بعناية من الطبيعة ، نسعى دائما لإرضاء زبنائنا و الاهتمام بهم سواء عبر تقديم المنتجات الطبيعية الخالية من المواد المضرة و الكميائية او عبر خدمة التوصيل المجانية حتى منزلك</p>
+	
+<p>	 بشهادة جميع مستعملي منتجاتنا فإن شركة ماربيو تتوفر على اجود المنتجات الطبيعية للعناية بالبشرة و الجسم، صنعت بكل فخر لكم
+</p>
 </div>
-
-<div class="col-5" style="margin: auto;">
-<a class="btn btn-info" href="http://localhost/wordpresse2/wordpress/product/argan-huile/">Voirs Plus</a>
+<div class="col-lg-12" style="margin: auto;">
+<a class="btn btn-info" href="http://localhost/wordpresse2/wordpress/shop/">اشتري الان</a>
 </div>
-
+</div>
 </div>
               </div>
           

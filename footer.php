@@ -152,13 +152,14 @@ $(window).on('scroll resize',animate_front_page_image);
 
 });
 
-
-  
-	
+       $('a.added_to_cart').addClass('btn');     
 
 </script>
 
+<script>
+	   new WOW().init();
 
+	</script>
 <?php  wp_footer(); ?>
 
 </body>

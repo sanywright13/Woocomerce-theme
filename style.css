@@ -257,7 +257,8 @@ font-size: 2.5rem;
     color: #fff;
     font-size: 2.3rem;
     font-weight: 386;
-   
+    background-color: #14171654;
+    padding: 6px 1px 4px 14px;
 }
 .storefront-breadcrumb {
     padding:0em;
@@ -456,10 +457,14 @@ padding: 29px;
     .navbar .widget_product_search {
         background: #e1845f;
     }
-    .second-title{position: relative;
-        top: -77%;
-        font-size: 1.3rem;
-        color: #fff4ed;}
+    .second-title{
+        position: relative;
+        top: 51px;
+        font-size: 1.5rem;
+        color: #e6e6e6;
+        justify-items: left;
+        justify-content: left;
+    }
         
         a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus {
             outline-color: none;
@@ -476,7 +481,7 @@ padding: 29px;
             margin-top: 112px;
         }
         .star-rating span::before, .quantity .plus, .quantity .minus, p.stars a:hover::after, p.stars a::after, .star-rating span::before, #payment .payment_methods li input[type="radio"]:first-child:checked + label::before {
-            color: #ea1a68;
+            color: #c9982c !important;
         }
         .conta {
          
@@ -535,6 +540,7 @@ color: #000;
 }
 .woocommerce-cart .woocommerce {
     display: flex;
+    justify-content: center;
   }
    .woocommerce .zone {
     display: block;
@@ -800,8 +806,8 @@ button.alt, input[type="button"].alt, input[type="reset"].alt, input[type="submi
     color: #ffffff;
 }
 button.alt:hover, input[type="button"].alt:hover, input[type="reset"].alt:hover, input[type="submit"].alt:hover, .button.alt:hover, .widget-area .widget a.button.alt:hover {
-    background-color: #eac145;
-    border-color: #1a1a1a;
+    background-color: #649333;
+    border-color: #649333;
     color: #ffffff;
 }
 .storefront-full-width-content.woocommerce-cart .entry-header h1:last-child, .storefront-full-width-content.woocommerce-checkout .entry-header h1:last-child, .storefront-full-width-content.woocommerce-account .entry-header h1:last-child, .storefront-full-width-content .woocommerce-products-header h1:last-child {
@@ -902,8 +908,8 @@ footer a {
 display: none;
 }
 .shop-now .button {
-    background-color: #fdca88;
-color: #0c2a03;
+    background-color: #eaa82c;
+
 width: 254px;
 }
 .shop-now .button:hover {
@@ -1014,6 +1020,7 @@ border-radius: 30px;
     }
     .product_info .added_to_cart.wc-forward {
         margin-top: 15px;
+        white-space: nowrap;
     }
  /* slider responsive*/
     @media (max-width: 812px) {
@@ -1021,7 +1028,7 @@ border-radius: 30px;
         .shop-now h3 {
             
             font-size: 1.5rem;
-            
+         
         }
         .shop-now .button{
             margin-left: 157px;
@@ -1115,4 +1122,28 @@ color: #ffff;
         font-size: 1.2rem;
         color: #0f0f0f;
         text-align: center;
+    }
+    .sd {
+        color: red;
+        font-weight: bold;
+    }
+    .search-no-results .woocommerce-info{
+        display:none;
+    }
+    .search-no-results .text-center {
+        color: red;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .fi a {
+        color: #fff;
+    }
+    .woocommerce-cart .woocommerce .cart-empty{
+        display: block;
+    }
+    /*responsive banner*/
+    @media (max-width: 425px) {
+        .second-title{
+            font-size: 1.2rem;
+        }
     }

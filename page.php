@@ -34,7 +34,7 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php	 if(is_cart()) {
+	<?php	 if(is_cart() && !WC()->cart->is_empty()) {
 	do_action('display_featured_products');
 		do_action( 'woocommerce_after_cart_table_change');?>
 	

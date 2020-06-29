@@ -47,37 +47,24 @@
   <div id="owl-demo" class="owl-carousel owl-theme">
      
 	 <div class="item">
-		 <div class="header-container background-costume" style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/4f523094d6ec66a1d01d8284fe898a82.jpg)">
+		 <div class="header-container background-costume" style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/ff.png)">
 	<div class="container">
 <div class="row shop-now">
+	<div class="fi">
 	<div class="col-md-12">
-<h3>	Notre sélection exclusive de cosmétiques biologiques vous offre un large choix de soins visage bio tant innovants que gourmands.</h3>
+<h3>ختار لي بغيتي و كلشي يوصلك حتى للدار فأقل من <span class="sd">48 </span>ساعة</h3>
 </div>
 
 <div class="col-md-12">
-	<a class="btn button">اشتري الان</a>
+	<a class="btn button" style="color: black;">اشتري الان</a>
+</div>
 </div>
 </div>
 </div>
 
    </div>
 </div>
-<div class="item">
-<div class="header-container background-costume" style="background-image:url(http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/animation-ayda-cosmetique-naturel-vegan-green-niche-1.jpg)">
-<div class="container">
-<div class="row shop-now">
-	<div class="col-md-12">
-<h3>	Notre sélection exclusive de cosmétiques biologiques vous offre un large choix de soins visage bio tant innovants que gourmands.</h3>
-</div>
 
-<div class="col-md-12">
-	<a class="btn button">اشتري الان</a>
-</div>
-</div>
-</div>
-
-</div>
-</div>
 </div>
 <?php }?>
 

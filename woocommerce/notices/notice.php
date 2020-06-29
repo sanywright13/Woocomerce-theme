@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! $notices ) {
 	return;
 }
-
+//var_dump(WC()->session->init());
 ?>
 
 <?php foreach ( $notices as $notice ) : ?>
