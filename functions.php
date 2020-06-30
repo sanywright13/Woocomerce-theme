@@ -12,17 +12,17 @@ function startwordpress_scripts() {
   wp_enqueue_style('owl-carousel2','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css');
  wp_enqueue_style('fontsawesome', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css');
        wp_enqueue_style('animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css');
-       wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
- 
+       wp_enqueue_style( 'font',  'https://fonts.googleapis.com/css2?family=Almarai&display=swap' );
 
+ 
    wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array( 'jquery' ),'',true );
    wp_enqueue_script( 'boot1','https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array( 'jquery' ),'',true );
 
-   wp_enqueue_script('san','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/owl.carousel.js');
+   wp_enqueue_script('san','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/OwlCarousel2-2.3.4/dist/owl.carousel.min.js');
    wp_enqueue_script('wow','http://localhost/wordpresse2/wordpress/wp-content/themes/subchild/js/WOW-master/dist/wow.min.js');
-
   }
-  
+
+
 //specific images sizes 
 add_image_size('products_front_page',250,350,true);
 add_image_size('category_sizes',500,283,true);
@@ -370,21 +370,21 @@ function remove_storefront_before_content(){
 <div class=" d-flex  justify-content-around">
   <div class="p-2  bd-highlight"><div class="ban">
 <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/57376501-bio-icon.jpg" style="width: 132px;">
-<div>كل منتجاتنا طبيعية 100%</div>
+<div class="ban_mini_title">كل منتجاتنا طبيعية 100%</div>
 </div></div>
   <div class="p-2  bd-highlight"><div class="ban">
   <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
-<div>خدمة الزبناء عبر الهاتف </div>
+<div class="ban_mini_title">خدمة الزبناء عبر الهاتف </div>
 </div></div>
   <div class="p-2  bd-highlight">
     <div class="ban">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
-<div>التوصيل مجاني و سريع</div>
+<div class="ban_mini_title">التوصيل مجاني و سريع</div>
 </div></div>
 <div class="p-2  bd-highlight">
     <div class="ban">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
-<div>اثمنة في المتناول</div>
+<div class="ban_mini_title" >اثمنة في المتناول</div>
 </div></div>
 </div>
 

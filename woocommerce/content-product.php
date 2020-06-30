@@ -24,7 +24,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<div  class="<?php if(is_product()){ echo 'col-lg-2 col-12 col-sm-12
+<div  class="<?php if(is_product()){ echo 'col-lg-2 col-sm-6 col-md-3 col-12 
 	';} else {echo 'mt-5 col-6 col-sm-6 col-md-4 col-lg-3';}?>    mb-3 product-item" <?php wc_product_class( '', $product ); ?>>
 	<?php
 	/**

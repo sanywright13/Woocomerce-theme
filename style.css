@@ -13,7 +13,7 @@
     font-weight: normal; 
     }
     body{
-        font-family:Georgia,Times,"Times New Roman",serif
+    font-family: 'Almarai', sans-serif;
     }
 a {
     color: #222;
@@ -406,31 +406,15 @@ padding: 29px;
     height: 505px;
 }
 .featured-image3{
-    height: 505px;
     background-position: center center;
-  
-    /* Background image doesn't tile */
+    background-color: #d97a413d;
+    background-blend-mode: multiply;
     background-repeat: no-repeat;
-    
-    /* Background image is fixed in the viewport so that it doesn't move when 
-       the content's height is greater than the image's height */
     background-attachment: fixed;
-    
-    /* This is what makes the background image rescale based
-       on the container's size */
     background-size: cover;
 }
-.overlay {
-  background-color: #d778253b;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.text-desc{font-size: 1.3rem;
-    color: #757574;
-    padding: 30px 84px 30px 10px;
-}
-.btn-info{margin-top: 40px;
+
+.btn-info{
     padding: 14px 28px;
     letter-spacing: 0.5px;
     font-size: 15px;
@@ -459,13 +443,13 @@ padding: 29px;
     }
     .second-title{
         position: relative;
-        top: 51px;
         font-size: 1.5rem;
         color: #e6e6e6;
-        justify-items: left;
         justify-content: left;
+       height: 476px;
+        align-items: center;
     }
-        
+       
         a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus {
             outline-color: none;
         }
@@ -490,7 +474,7 @@ padding: 29px;
         }
         
         .menu-item a:hover {
-            color: #4acc37;
+            color: #206807;
            
         }
         .nav-pills .nav-link {
@@ -651,7 +635,7 @@ p.form-row {
     color: #423f3f;
     font-size: 2.2rem;
     font-weight: 543;
- padding: 0em 0em 1em;
+    padding: 0em 0em 2em 1em;
 }
 .site-info a {
     display:none;
@@ -756,7 +740,7 @@ position:relative;
    }
   
     .st {
-        top: -102px;
+        top: -64px;
         padding: 4px 6px 4px 15px;
         background-color: #1617178f;
         max-height: 100px;
@@ -1147,3 +1131,35 @@ color: #ffff;
             font-size: 1.2rem;
         }
     }
+    .woocommerce-Reviews-title {
+        display: none;
+    }
+    .single-product .woocommerce-noreviews{
+        background-color: #fff;
+        text-align: center;
+        border-left: none;
+    }
+    .single-product .summary .product_title {
+        margin-bottom: 2rem;
+    }
+    .single-product .summary ins  .woocommerce-Price-amount{
+        color: #ff1b1b;
+font-size: 1.6rem;
+    }
+    .single-product .summary del  .woocommerce-Price-amount{
+        font-size: 1.2rem;
+color: #59595b;
+    }
+    .single-product .summary .woocommerce-product-details__short-description{
+        color: #232424;
+    }
+       /*responsive footer*/
+       @media (max-width: 776) {
+        .footer-top{
+            font-size: .9rem;
+        }
+        .ban .ban_mini_title {
+            font-size: .9rem;
+        }
+    }
+    
