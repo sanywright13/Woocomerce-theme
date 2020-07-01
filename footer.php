@@ -45,63 +45,14 @@
 
 	?>
 <script>
-	   new WOW().init();
+	   var wow = new WOW();
+  wow.init();
 
 	</script>
 	<script>
 
 jQuery(document).ready(function($){
 
-  function  check_if_in_view (){
- 
-$('.animate__animated').each(function(){
-	element_high=$(this).offset().top+$(this).outerHeight();
-
-	window_scroll=$(window).scrollTop()+$(window).height();
-	
-	if($(this).offset().top<=window_scroll && element_high>=$(window).scrollTop()){
-	
-if($(this)[0]==$('.bio_category_desc')[0]){
-$(this).addClass('animate__fadeInLeft')
-}
-	if($(this)[0]==$('.zone')[0]){
-		$(this).addClass('animate__slideInUp')
-	}
-
-
-}
-
-})
- }
- 
-	$(window).on('scroll resize', check_if_in_view);
-	function animate_front_page_image(){
-			
-		$('.ss').each(function(){
-			element_high=$(this).offset().top+$(this).outerHeight();
-
-	window_scroll=$(window).scrollTop()+$(window).height();
-	
-			element_high=$(this).offset().top+$(this).outerHeight();
-
-	window_scroll=$(window).scrollTop()+$(window).height();
-	if($(this).offset().top<=window_scroll && element_high>=$(window).scrollTop()){
-			$(this).addClass('animate__animated animate__fadeInUpBig')	;
-			}
-		})
-	}
-$(window).on('scroll resize',animate_front_page_image);
-	$('.zone .col-2 ').on('hover',function(){
-	  $(this).toggleClass('animate__animated animate__headShake')
-	  
-  })
-  $('.attachment-post-thumbnail').on('hover',function(){
-	$(this).toggleClass('animate__animated animate__pulse')
-	  
-  });
- 
-
-   
   $("#owl-demo").owlCarousel({
 		loop:true,
 		 nav : true, // Show next and prev buttons

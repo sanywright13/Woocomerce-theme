@@ -32,6 +32,7 @@ $all_notices['success'][0]['notice']="";
 	<div class="woocommerce-message"<?php echo wc_get_notice_data_attr( $notice ); ?> role="alert">
 
 		<?php 
+		/*
 		if(is_product())
 
 		echo '
@@ -43,9 +44,12 @@ $all_notices['success'][0]['notice']="";
 		<a href="'.wc_get_cart_url().'"> ادهب الى السلة<a/>
 		</div>
 		</div>'; 
+		
 		else {
-if(is_cart())
-			echo 'تم مسح هدا المنتج من السلة';
-		}?>
+		*/	
+if(is_cart() || is_product())
+ echo wc_kses_notice( $notice['notice'] );
+			
+		?>
 	</div>
 <?php endforeach; ?>

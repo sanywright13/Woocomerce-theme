@@ -138,7 +138,7 @@ add_filter('loop_shop_per_page','new_loop_shop_per_page',20);
 if(!function_exists('new_loop')){
   function new_loop_shop_per_page($col){
 if(is_archive('product')){
-  $col=8;
+  $col=12;
   return $col;
 }
   }
@@ -234,18 +234,6 @@ add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_
 function woocommerce_custom_product_add_to_cart_text() {
     return __( 'Ajouter Au Panier', 'woocommerce' );
 }
-/*
-add_action('storefront_page','section_categories',21);
-
-function section_categories(){
-  if(is_front_page()){?>
-  <section class="categories">
-  Hi
-  </section>
-  <?php
-}
-}
-*/
 
 add_action('storefront_page','section_laivraison',22);
 function section_laivraison(){
@@ -368,21 +356,21 @@ function remove_storefront_before_content(){
 <section class=" zone animate__animated">
 
 <div class=" d-flex  justify-content-around">
-  <div class="p-2  bd-highlight"><div class="ban">
+  <div class="p-2  bd-highlight"><div class="ban wow animate__animated ">
 <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/57376501-bio-icon.jpg" style="width: 132px;">
 <div class="ban_mini_title">كل منتجاتنا طبيعية 100%</div>
 </div></div>
-  <div class="p-2  bd-highlight"><div class="ban">
+  <div class="p-2  bd-highlight"><div class="ban  wow animate__animated ">
   <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/call-icon-vector-noisy-phone-flat-calling-symbol-isolated-white-background-163818838.jpg" style="width: 146px;">
 <div class="ban_mini_title">خدمة الزبناء عبر الهاتف </div>
 </div></div>
   <div class="p-2  bd-highlight">
-    <div class="ban">
+    <div class="ban  wow animate__animated ">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/860302-200.png" style="width: 152px;">
 <div class="ban_mini_title">التوصيل مجاني و سريع</div>
 </div></div>
 <div class="p-2  bd-highlight">
-    <div class="ban">
+    <div class="ban  wow animate__animated ">
     <img src="http://localhost/wordpresse2/wordpress/wp-content/uploads/2020/06/index.png" style="width: 152px;">
 <div class="ban_mini_title" >اثمنة في المتناول</div>
 </div></div>
@@ -399,16 +387,6 @@ function remove_storefront_before_content(){
   remove_action( 'storefront_page', 'storefront_page_header', 10 );
    
 }
-/*
-add_filter('woocommerce_form_field','edit_form_fields_checkout_page',10,3);
-if(!function_exists('edit_form_fields_checkout_page')){
-  function edit_form_fields_checkout_page($key,$args,$value){
-
-
-  }
-}
-*/
-
 
 add_filter('woocommerce_form_field_args','change_behave_form_fields',10,3);
 function change_behave_form_fields($args, $key, $value){
@@ -759,10 +737,6 @@ function edit_shop_storefront_before_content() {
 	}
 }
 
-
-
-// Append cart item (and cart count) to end of main menu.
-
 add_shortcode('woo_mini_cart','woo_mini_cart');
 function woo_mini_cart(){
   ob_start();
@@ -826,7 +800,7 @@ function remove_woocommerce_breadcrumb(){
 remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
 }
 
-add_action( 'storefront_before_content', 'add_single_product_breadcrumb', 10);
+add_action( 'woocommerce_before_single_product_summary', 'add_single_product_breadcrumb', 10);
 function add_single_product_breadcrumb(){
   
   if(is_product()){
@@ -867,4 +841,111 @@ if(is_search()){
  }
 }
 }
+
+add_action( 'wp_footer', 'bbloomer_cart_refresh_update_qty' ); 
+ 
+function bbloomer_cart_refresh_update_qty() { 
+   if (is_cart()) { 
+      ?> 
+      <script type="text/javascript"> 
+         jQuery('div.woocommerce').on('click', 'input.qty', function(){ 
+            jQuery("[name='update_cart']").trigger("click"); 
+         }); 
+      </script> 
+      <?php 
+   } 
+}
+/*
+add_filter( 'woocommerce_update_cart_action_cart_updated', 'when_cart_updated' ,10);
+function when_cart_updated($cart_updated){
+if($cart_updated){
+               wc_add_notice( __( 'ff.', 'woocommerce' ) );
+ 
+}
+return $cart_updated;
+}
+
+add_filter( 'woocommerce_cart_item_removed_title', 'removed_from_cart_title', 12, 2);
+function removed_from_cart_title( $message, $cart_item ) {
+    $product = wc_get_product( $cart_item['product_id'] );
+
+    if( $product )
+        $message = sprintf( __('تم مسح هدا المنتج من سلة المشتريات'));
+
+    return $message;
+}
+*/
+add_filter('gettext', 'cart_undo_translation', 35, 3 );
+function cart_undo_translation( $translation, $text, $domain ) {
+
+    if( $text === 'Undo?' ) {
+        $translation =  __( 'ارجاعه', $domain );
+    }
+    if( $text === 'removed' ) {
+      $translation =  __( 'ارجاعه', $domain );
+  }
+  if ($text == 'Cart updated.') {
+    $translation = 'تم تحديت السلة';
+}
+    return $translation;
+}
+
+add_filter( 'wc_add_to_cart_message_html', 'bbloomer_custom_add_to_cart_message' );
+ 
+function bbloomer_custom_add_to_cart_message() {
+$message = '<div class="d-flex bd-highlight">
+<div class="flex-grow-1">
+<span> تمت إضافة المنتج إلى سلة التسوق الخاصة بك </span> 
+</div>
+<div>
+<a href="'.wc_get_cart_url().'"> ادهب الى السلة<a/>
+</div>
+</div>' ;
+return $message;
+}
+/*
+add_action('woocommerce_after_cart_item_quantity_update','example',20,4);
+function example($cart_item_key, $quantity, $old_quantity, $cart){
+
+  if( !is_cart() ) return; // Only on cart page
+// Here the quantity limit
+$limit = 5;
+echo $cart->cart_contents[ $cart_item_key ]['quantity'];
+
+    // Change the quantity to the limit allowed
+echo $quantity; // Add a custom notice
+    wc_add_notice( __('Quantity limit reached for this item'), 'notice' );
+
+}
+*/
+add_action( 'template_redirect', 'null_removed_cart_item_message'  );
+function null_removed_cart_item_message() {
+    if( ! is_cart() ) return;
+    $wc_notices = (array) WC()->session->get( 'wc_notices' );
+   
+    $found      = false; 
+    if( isset($wc_notices['success']) && sizeof($wc_notices['success']) ) {
+        foreach( $wc_notices['success'] as $key => $wc_notice ) {
+       
+           if ( strpos($wc_notice['notice'], 'removed') !== false ) {
+                unset($wc_notices['success']);
+                $found = true;
+            }
+        }
+    }
+    if( $found ) {
+        WC()->session->set( 'wc_notices', $wc_notices );
+    }
+  }
+  add_action( 'woocommerce_before_shop_loop', 'remove_woocommerce_pagination',9 );
+  function remove_woocommerce_pagination(){
+    remove_action( 'woocommerce_before_shop_loop', 'storefront_woocommerce_pagination', 30 );
+  }
+  add_action( 'woocommerce_after_shop_loop1', 'add_woocommerce_shop_pagination',10 );
+  function add_woocommerce_shop_pagination(){
+    if ( woocommerce_products_will_display() ) {?>
+		<div class="d-flex justify-content-center"><?php	woocommerce_pagination(); ?></div>
+   <?php }
+    }
+
 ?>

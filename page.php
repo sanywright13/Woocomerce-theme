@@ -13,7 +13,10 @@
 get_header(); ?>
 	<div id="primary" class="<?php if(is_cart() || is_checkout() || is_product() || is_tax('shop')){?>container mt-5<?php }?>">
 		<main id="main" class="site-main " role="main">
+<?php if(is_cart()){
 
+	}
+?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
@@ -37,6 +40,7 @@ get_header(); ?>
 	<?php	 if(is_cart() && !WC()->cart->is_empty()) {
 			do_action( 'woocommerce_after_cart_table_change');
 	do_action('display_featured_products');
+	
 	?>
 	
 	<?php 

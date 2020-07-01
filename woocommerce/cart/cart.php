@@ -15,7 +15,6 @@
  * @version 3.8.0
  */
 defined( 'ABSPATH' ) || exit;
-
  ?>
 
 <form class="sanaa woocommerce-cart-form col-lg-8 col-md-12 col-sm-12" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
@@ -37,6 +36,7 @@ defined( 'ABSPATH' ) || exit;
 
 			<?php
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+				
 				$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 				$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
@@ -173,6 +173,7 @@ defined( 'ABSPATH' ) || exit;
 	?>
 </div>
 
-<?php do_action( 'woocommerce_after_cart' );
+<?php
+do_action( 'woocommerce_after_cart' );
 
 ?>

@@ -394,7 +394,7 @@ padding: 29px;
 
   .produit-details:hover .hvr-bounce-out{
     transform: scale(0.9);
-  
+    -webkit-transform: scale(0.9);
   }
   .produit-details:hover .product_info {
     position: relative;
@@ -850,11 +850,12 @@ footer a {
     width: 94%;
 }
 .special-product .f-titre{
-    text-align: left;
+    text-align: center;
     font-weight: 550;
-    color: #555555;
+    color: #170e0e;
     line-height: 21px;
-    font-size: 15px;
+    font-size: 1rem;
+    margin-top: 5px;
 }
 .col-lg-3 .special-product {
     width: 77%;
@@ -1069,7 +1070,6 @@ color: #020202;
     }
     .single-product .breadcrumb {
         background-color: #fff;
-        margin: 2em 9em;
         font-size: 1.2rem;
     }
     .search-results ul, ol{
@@ -1106,6 +1106,8 @@ color: #ffff;
         font-size: 1.2rem;
         color: #0f0f0f;
         text-align: center;
+        animation: fadeInUp ;
+        animation-duration:1.2s;
     }
     .sd {
         color: red;
@@ -1163,3 +1165,24 @@ color: #59595b;
         }
     }
     
+    .col-lg-6 .wow {
+        animation-name: fadeInLeft;
+ animation-duration: 1s; 
+ animation-direction: alternate; 
+ animation-timing-function: ease-out; 
+ animation-fill-mode: forwards; 
+    }
+    .f-titre span{
+        color:red;
+    }
+    input[name='update_cart'] {
+        display: none !important;
+        }
+         
+         
+        button[name='update_cart'] {
+        display: none !important;
+        }
+        .btn-outline-danger{
+            font-weight: bold;
+        }
